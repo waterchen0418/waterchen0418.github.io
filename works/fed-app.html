@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed APP — Sharon Chen</title>
+  <link rel="icon" href="../assets/img/cube.ico" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/case-study.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html#works" class="nav__logo nav__back" data-zh="← 所有作品">← All Works</a>
+      <ul class="nav__links">
+        <li><a href="../index.html#about" data-zh="關於">About</a></li>
+        <li><a href="../index.html#works" data-zh="作品">Works</a></li>
+        <li><a href="../index.html#contact" data-zh="聯絡">Contact</a></li>
+        <li><a href="../SharonChen_CV.pdf" target="_blank" rel="noopener" data-zh="履歷">CV</a></li>
+        <li class="lang-switch" id="langSwitch">
+          <button class="lang-switch__btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+            <span id="langCurrent">EN</span>
+            <svg class="lang-switch__chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="lang-switch__menu" id="langMenu" role="listbox" aria-label="Language">
+            <li><button class="lang-switch__opt" type="button" data-lang="en" role="option">English</button></li>
+            <li><button class="lang-switch__opt" type="button" data-lang="zh" role="option">中文</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <div class="cs-hero__img" style="background-image: url('../assets/img/fed-app/Hero.jpg'); background-size: cover; background-position: center;">
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="container">
+      <div class="cs-overview__grid">
+        <div class="cs-overview__main">
+          <p class="label" data-zh="案例研究 — 01">Case Study — 01</p>
+          <h1 class="cs-title">Fed APP</h1>
+          <p class="cs-lead" data-zh="遠東百貨 App 的改版——更順的兌換流程、遊戲化的集點機制、會員卡整合，以及更具質感的視覺語言。">A redesign of Far Eastern Department Store's app — a faster redemption flow, gamified point-earning, membership card integration, and a more premium visual language.</p>
+        </div>
+        <div class="cs-overview__meta">
+          <div class="cs-meta-item">
+            <p class="cs-meta__label" data-zh="角色">Role</p>
+            <p class="cs-meta__value" data-zh="UI / UX 設計師">UI / UX Designer</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta__label" data-zh="平台">Platform</p>
+            <p class="cs-meta__value">iOS / Android</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta__label" data-zh="工具">Tools</p>
+            <p class="cs-meta__value">Figma · Adobe XD</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="cs-block">
+        <p class="label" data-zh="01 — 挑戰">01 — Challenge</p>
+        <h2 class="cs-section__title" data-zh="問題">The Problem</h2>
+        <p class="cs-body" data-zh="原本的 Fed APP 使用體驗零碎——點數兌換需要多個步驟、會員卡被埋在設定裡，視覺相較競品也顯得過時。兌換流程的流失率偏高，回訪的使用者也難以理解自己累積的點數價值。">The existing Fed APP had a fragmented experience — points redemption took several steps, membership cards were buried in settings, and the visuals felt dated next to competitors. Drop-off during redemption was high, and returning users struggled to understand the value of their accumulated points.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENS ROW 1 -->
+  <section class="cs-screens">
+    <div class="container">
+      <div class="cs-screens__grid">
+        <img class="cs-screen-img" src="../assets/img/fed-app/fed-3.webp" alt="Problem Statement" />
+        <img class="cs-screen-img" src="../assets/img/fed-app/fed-4.webp" alt="Pain Points" />
+        <img class="cs-screen-img" src="../assets/img/fed-app/fed-5.webp" alt="User Flow" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section">
+    <div class="container">
+      <div class="cs-block">
+        <p class="label" data-zh="02 — 流程">02 — Process</p>
+        <h2 class="cs-section__title" data-zh="研究與設計">Research &amp; Design</h2>
+        <p class="cs-body" data-zh="我訪談了 12 位忠實會員，並針對 5 款零售集點 App 進行競品分析。關鍵洞察是：使用者希望立即感受到獎勵，而原本 3 步驟的兌換流程削弱了這份體驗。我運用 JTBD，圍繞使用者真正想完成的任務重新設計每個接觸點。">I interviewed 12 loyal members and ran a competitive analysis of 5 retail loyalty apps. The key insight: users want to feel rewarded immediately, and the existing 3-step redemption flow undercut that. Using JTBD, I reframed each touchpoint around the task the user was actually trying to complete.</p>
+      </div>
+      <div class="cs-highlights">
+        <div class="cs-highlight">
+          <span class="cs-highlight__num">12</span>
+          <p data-zh="位會員深度訪談">User interviews conducted</p>
+        </div>
+        <div class="cs-highlight">
+          <span class="cs-highlight__num">5</span>
+          <p data-zh="款競品 App 分析">Competitor apps audited</p>
+        </div>
+        <div class="cs-highlight">
+          <span class="cs-highlight__num">3→1</span>
+          <p data-zh="兌換步驟精簡">Redemption steps reduced</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENS ROW 2 — sticky horizontal scroll -->
+  <div class="cs-scroll-container">
+    <div class="cs-scroll-sticky">
+      <div class="cs-scroll-row">
+        <img class="cs-scroll-img" src="../assets/img/fed-app/fed-8.webp" alt="Home Page" />
+        <img class="cs-scroll-img" src="../assets/img/fed-app/fed-9.webp" alt="Redeem Rewards Points" />
+        <img class="cs-scroll-img" src="../assets/img/fed-app/fed-10.webp" alt="Earn Points in a Game" />
+        <img class="cs-scroll-img" src="../assets/img/fed-app/fed-11.webp" alt="Personalized Service" />
+        <img class="cs-scroll-img" src="../assets/img/fed-app/fed-12.webp" alt="Final Showcase" />
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME -->
+  <section class="section">
+    <div class="container">
+      <div class="cs-block">
+        <p class="label" data-zh="03 — 成果">03 — Results</p>
+        <h2 class="cs-section__title" data-zh="成效">Impact</h2>
+        <p class="cs-body" data-zh="上線後，互動與轉換皆有提升。遊戲化的集點機制帶動每日活躍使用，精簡後的兌換流程減少了與點數相關的客服工單，煥新的視覺語言也與品牌的高端零售定位一致。">After launch, engagement and conversion both improved. The gamified earning mechanics drove daily active use, the streamlined redemption flow reduced support tickets related to points confusion, and the refreshed visual language aligned with the brand's premium retail positioning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE NAV -->
+  <div class="cs-nav-cases section" style="padding-top: 0;">
+    <div class="container">
+      <div class="cs-nav-cases__inner">
+        <a href="../index.html#works" class="btn btn--ghost" data-zh="← 所有作品">← All Works</a>
+        <a href="fubon.html" class="cs-nav-cases__next">
+          <span data-zh="下一個案例">Next Case</span>
+          <strong>Fubon Financial →</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__copy" data-zh="© 2025 Sharon Chen. 版權所有。">© 2025 Sharon Chen. All rights reserved.</p>
+      <p class="footer__craft" data-zh="用好奇心、HTML 和 Claude Code 寫成。">Made with curiosity, HTML, and Claude Code.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect (reuse without hero video logic)
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Sticky scroll carousel — vertical page scroll drives horizontal position (desktop only)
+    const scrollContainer = document.querySelector('.cs-scroll-container');
+    const scrollRow = document.querySelector('.cs-scroll-row');
+    if (scrollContainer && scrollRow) {
+      const isMobile = () => window.innerWidth <= 768;
+
+      const setHeight = () => {
+        if (isMobile()) {
+          scrollContainer.style.height = '';
+          return;
+        }
+        const maxScroll = scrollRow.scrollWidth - scrollRow.clientWidth;
+        scrollContainer.style.height = (window.innerHeight + maxScroll) + 'px';
+      };
+
+      window.addEventListener('resize', setHeight);
+      if (document.readyState === 'complete') {
+        setHeight();
+      } else {
+        window.addEventListener('load', setHeight);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (isMobile()) return;
+        const containerTop = scrollContainer.offsetTop;
+        const progress = Math.max(0, window.scrollY - containerTop);
+        const maxScroll = scrollRow.scrollWidth - scrollRow.clientWidth;
+        scrollRow.scrollLeft = Math.min(progress, maxScroll);
+      }, { passive: true });
+    }
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.cs-block, .cs-highlights, .cs-screens, .cs-overview__main, .cs-overview__meta');
+    revealEls.forEach((el, i) => {
+      el.classList.add('reveal');
+      if (i % 2 === 1) el.classList.add('reveal-delay-1');
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  </script>
+  <script src="../assets/js/i18n.js"></script>
+
+</body>
+</html>

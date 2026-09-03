@@ -1,0 +1,366 @@
+/* ============================
+   CASE STUDY PAGE
+   ============================ */
+
+/* Back link — replaces logo in nav */
+.nav__back {
+  transition: color 0.2s, letter-spacing 0.2s;
+}
+.nav__back:hover {
+  color: var(--blue-mid);
+  letter-spacing: 0.01em;
+}
+
+/* Hero */
+.cs-hero {
+  padding-top: 60px;
+  width: 100%;
+}
+.cs-hero__img {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  view-transition-name: case-hero;
+}
+.cs-hero__icon {
+  font-size: 72px;
+  opacity: 0.4;
+  color: var(--blue-dark);
+}
+
+/* Overview */
+.cs-overview__grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 80px;
+  align-items: start;
+  padding-top: 24px;
+}
+.cs-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.05;
+  margin: 12px 0 24px;
+  letter-spacing: -0.02em;
+}
+.cs-lead {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-mid);
+  max-width: 560px;
+}
+
+/* Meta sidebar */
+.cs-overview__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--border);
+  padding-left: 40px;
+  margin-top: 60px;
+}
+.cs-meta-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cs-meta-item:first-child { padding-top: 0; }
+.cs-meta-item:last-child { border-bottom: none; }
+.cs-meta__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+.cs-meta__value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Content sections */
+.cs-block {
+  max-width: 680px;
+}
+.cs-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--text);
+  margin: 14px 0 20px;
+  letter-spacing: -0.01em;
+}
+.cs-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--text-mid);
+}
+
+/* Stats row */
+.cs-highlights {
+  display: flex;
+  gap: 0;
+  margin-top: 56px;
+  border-top: 1px solid var(--border);
+}
+.cs-highlight {
+  flex: 1;
+  padding: 36px 32px;
+  border-right: 1px solid var(--border);
+}
+.cs-highlight:last-child { border-right: none; }
+.cs-highlight__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--blue-mid);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.cs-highlight p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* Screen placeholders */
+.cs-screens {
+  padding: 48px 0;
+}
+.cs-screens__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.cs-screens__grid--2 {
+  grid-template-columns: 1fr 1fr;
+}
+.cs-screen-placeholder {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  aspect-ratio: 9/16;
+  max-width: 260px;
+  margin: 0 auto;
+  width: 100%;
+}
+.cs-screen-placeholder--tall {
+  aspect-ratio: 4/5;
+  max-width: 100%;
+}
+
+/* Case hero cover image (natural ratio, no crop) */
+.cs-hero__cover {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Stacked full-width screens */
+.cs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Screen images */
+.cs-screen-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+}
+
+/* Sticky horizontal scroll carousel */
+.cs-scroll-container {
+  /* height set by JS: 100vh + total horizontal scroll distance */
+}
+.cs-scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--bg-alt);
+}
+.cs-scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  padding: 0 40px;
+  width: 100%;
+  scrollbar-width: none;
+}
+.cs-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+.cs-scroll-img {
+  flex: 0 0 auto;
+  height: clamp(200px, 55vh, 520px);
+  width: auto;
+  max-width: none;
+  display: block;
+  border-radius: var(--radius-md);
+}
+
+/* Mobile — disable sticky, show as swipeable row */
+@media (max-width: 768px) {
+  .cs-scroll-container {
+    height: auto !important;
+  }
+  .cs-scroll-sticky {
+    position: static;
+    height: auto;
+    padding: 48px 0;
+  }
+  .cs-scroll-row {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 24px 16px;
+    gap: 12px;
+  }
+  .cs-scroll-img {
+    height: auto;
+    width: 80vw;
+    max-width: 320px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Full-bleed section */
+.cs-full-bleed {
+  padding: 80px 0;
+  margin: 0;
+}
+
+/* Case nav */
+.cs-nav-cases__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.cs-nav-cases__next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  color: var(--text-mid);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.cs-nav-cases__next strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.cs-nav-cases__next:hover strong {
+  color: var(--blue-mid);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .cs-overview__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .cs-overview__meta {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .cs-hero__img { height: 280px; }
+  .cs-screens__grid { grid-template-columns: repeat(2, 1fr); }
+  .cs-highlights { flex-direction: column; }
+  .cs-highlight { border-right: none; border-bottom: 1px solid var(--border); }
+  .cs-nav-cases__inner { flex-direction: column; gap: 24px; align-items: flex-start; }
+}
+
+/* Password lock screen (protected case study) */
+.cs-lock {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.cs-lock__card {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 36px;
+  box-shadow: 0 20px 60px rgba(30, 60, 90, 0.08);
+}
+.cs-lock__icon { font-size: 42px; line-height: 1; margin-bottom: 18px; }
+.cs-lock__title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+.cs-lock__sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin: 0 auto 28px;
+  max-width: 34ch;
+}
+.cs-lock__form { display: flex; gap: 10px; }
+.cs-lock__input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+.cs-lock__input:focus { outline: none; border-color: var(--blue-mid); }
+.cs-lock__btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 100px;
+  background: var(--blue-mid);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cs-lock__btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(58, 158, 212, 0.3); }
+.cs-lock__btn:focus-visible { outline: 2px solid var(--blue-mid); outline-offset: 2px; }
+.cs-lock__error { color: #d1495b; font-size: 13px; margin: 14px 0 0; }
+.cs-lock__back {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-soft);
+  text-decoration: none;
+}
+.cs-lock__back:hover { color: var(--blue-mid); }

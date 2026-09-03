@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protected Project — Sharon Chen</title>
+  <link rel="icon" href="../assets/img/cube.ico" sizes="32x32" />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/case-study.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html#works" class="nav__logo nav__back" data-zh="← 所有作品">← All Works</a>
+      <ul class="nav__links">
+        <li><a href="../index.html#about" data-zh="關於">About</a></li>
+        <li><a href="../index.html#works" data-zh="作品">Works</a></li>
+        <li><a href="../index.html#contact" data-zh="聯絡">Contact</a></li>
+        <li><a href="../SharonChen_CV.pdf" target="_blank" rel="noopener" data-zh="履歷">CV</a></li>
+        <li class="lang-switch" id="langSwitch">
+          <button class="lang-switch__btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+            <span id="langCurrent">EN</span>
+            <svg class="lang-switch__chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="lang-switch__menu" id="langMenu" role="listbox" aria-label="Language">
+            <li><button class="lang-switch__opt" type="button" data-lang="en" role="option">English</button></li>
+            <li><button class="lang-switch__opt" type="button" data-lang="zh" role="option">中文</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- LOCK SCREEN -->
+  <section class="cs-lock" id="csLock">
+    <div class="cs-lock__card">
+      <div class="cs-lock__icon">🔒</div>
+      <h1 class="cs-lock__title" data-zh="保密專案">Protected Case Study</h1>
+      <p class="cs-lock__sub" data-zh="這是一個後台系統專案，內容受保護。請輸入密碼查看，密碼可於面試時提供。">This is a backend / internal-tool project. The content is protected — enter the password to view. Available on request.</p>
+      <form class="cs-lock__form" id="csLockForm">
+        <input type="password" class="cs-lock__input" id="csLockInput" placeholder="Password" autocomplete="off" aria-label="Password" />
+        <button type="submit" class="cs-lock__btn" data-zh="解鎖">Unlock</button>
+      </form>
+      <p class="cs-lock__error" id="csLockError" hidden data-zh="密碼不對，再試一次。">Wrong password — please try again.</p>
+      <a href="../index.html#works" class="cs-lock__back" data-zh="← 回到作品">← Back to works</a>
+    </div>
+  </section>
+
+  <!-- PROTECTED CONTENT (revealed after unlock) -->
+  <div id="csContent" hidden>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+      <img class="cs-hero__cover" src="../assets/img/backend/000.png" alt="B2B SaaS platform — cover" />
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-overview__grid">
+          <div class="cs-overview__main">
+            <p class="label" data-zh="案例研究 — 05">Case Study — 05</p>
+            <h1 class="cs-title" data-zh="AI Agent B2B SaaS 平台">AI Agent B2B SaaS Platform</h1>
+            <p class="cs-lead" data-zh="〔可調整〕一個服務 B2B 銷售團隊的 SaaS 平台——管理 AI 銷售代理、團隊結構與成效分析。之後可由你提供內容替換。">[Adjustable] A B2B SaaS platform for sales teams — managing AI sales agents, team structure, and performance analytics. Copy can be replaced with your content.</p>
+          </div>
+          <div class="cs-overview__meta">
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="角色">Role</p>
+              <p class="cs-meta__value" data-zh="Product Designer">Product Designer</p>
+            </div>
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="平台">Platform</p>
+              <p class="cs-meta__value" data-zh="網頁 · B2B SaaS">Web · B2B SaaS</p>
+            </div>
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="工具">Tools</p>
+              <p class="cs-meta__value">Figma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="01 — 挑戰">01 — Challenge</p>
+          <h2 class="cs-section__title" data-zh="〔待補標題〕">[Section title]</h2>
+          <p class="cs-body" data-zh="〔佔位〕描述這個後台原本的問題——例如操作繁瑣、資訊分散、效率低等。之後替換成真實內容。">[Placeholder] Describe the original problem with the backend — e.g. tedious workflows, scattered information, low efficiency. To be replaced with real content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="02 — 流程">02 — Process</p>
+          <h2 class="cs-section__title" data-zh="〔待補標題〕">[Section title]</h2>
+          <p class="cs-body" data-zh="〔佔位〕你怎麼研究、設計、驗證這個後台。之後替換成真實內容。">[Placeholder] How you researched, designed, and validated the tool. To be replaced with real content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="03 — 成果">03 — Results</p>
+          <h2 class="cs-section__title" data-zh="〔待補標題〕">[Section title]</h2>
+          <p class="cs-body" data-zh="〔佔位〕改版後的成效——效率提升、錯誤減少、團隊採用率等。之後替換成真實內容。">[Placeholder] The impact after the redesign — efficiency gains, fewer errors, team adoption. To be replaced with real content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE NAV -->
+    <div class="cs-nav-cases section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-nav-cases__inner">
+          <a href="../index.html#works" class="btn btn--ghost" data-zh="← 所有作品">← All Works</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer__copy" data-zh="© 2025 Sharon Chen. 版權所有。">© 2025 Sharon Chen. All rights reserved.</p>
+        <p class="footer__craft" data-zh="用好奇心、HTML 和 Claude Code 寫成。">Made with curiosity, HTML, and Claude Code.</p>
+      </div>
+    </footer>
+
+  </div><!-- /csContent -->
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ---- Password gate (client-side; deters casual visitors, not real security) ----
+    // Hash of the current password (SHA-256, hex). Temporary password: demo1234
+    const PASS_HASH = '0ead2060b65992dca4769af601a1b3a35ef38cfad2c2c465bb160ea764157c5d';
+    const STORE_KEY = 'backendUnlocked';
+    const lock = document.getElementById('csLock');
+    const content = document.getElementById('csContent');
+    const form = document.getElementById('csLockForm');
+    const input = document.getElementById('csLockInput');
+    const errEl = document.getElementById('csLockError');
+
+    async function sha256Hex(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    function reveal() {
+      lock.hidden = true;
+      lock.style.display = 'none';
+      content.hidden = false;
+    }
+    try { if (sessionStorage.getItem(STORE_KEY) === '1') reveal(); } catch (e) {}
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errEl.hidden = true;
+      let ok = false;
+      try { ok = (await sha256Hex(input.value)) === PASS_HASH; } catch (e) { ok = false; }
+      if (ok) {
+        try { sessionStorage.setItem(STORE_KEY, '1'); } catch (e) {}
+        reveal();
+      } else {
+        errEl.hidden = false;
+        input.value = '';
+        input.focus();
+      }
+    });
+  </script>
+  <script src="../assets/js/i18n.js"></script>
+
+</body>
+</html>

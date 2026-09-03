@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharon Chen — UI/UX Product Designer</title>
+  <link rel="icon" href="assets/img/cube.ico" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo">Sharon Chen</a>
+      <ul class="nav__links">
+        <li><a href="#about" data-zh="關於">About</a></li>
+        <li><a href="#works" data-zh="作品">Works</a></li>
+        <li><a href="#contact" data-zh="聯絡">Contact</a></li>
+        <li><a href="SharonChen_CV.pdf" target="_blank" rel="noopener" data-zh="履歷">CV</a></li>
+        <li class="lang-switch" id="langSwitch">
+          <button class="lang-switch__btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+            <span id="langCurrent">EN</span>
+            <svg class="lang-switch__chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="lang-switch__menu" id="langMenu" role="listbox" aria-label="Language">
+            <li><button class="lang-switch__opt" type="button" data-lang="en" role="option">English</button></li>
+            <li><button class="lang-switch__opt" type="button" data-lang="zh" role="option">中文</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SCROLL CONTAINER -->
+  <div class="hero-scroll" id="hero">
+
+    <!-- Sticky viewport -->
+    <div class="hero-sticky">
+
+      <!-- Video background -->
+      <div class="hero__video-wrap">
+        <video
+          class="hero__video"
+          id="heroVideo"
+          src="hero-seedance.mp4"
+          autoplay muted loop playsinline preload="auto"
+        ></video>
+        <div class="hero__overlay" id="heroOverlay"></div>
+      </div>
+
+      <!-- Chapter panels -->
+      <div class="hero__chapters">
+
+        <!-- Intro panel (before chapters) -->
+        <div class="hero__panel hero__panel--intro" id="panelIntro">
+          <p class="hero__eyebrow" data-zh="UI/UX 產品設計師">UI/UX Product Designer</p>
+          <h1 class="hero__title" data-zh="打造<br/>真正有效的<br/>體驗">
+            Designing<br/>experiences<br/>that work
+          </h1>
+          <p class="hero__sub" data-zh="研究、設計，以及來一杯珍奶微微。">Research, design, and a bubble tea — light sugar, light ice.</p>
+          <div class="hero__scroll-hint">
+            <span data-zh="捲動">Scroll</span>
+            <div class="hero__scroll-line"></div>
+          </div>
+        </div>
+
+        <!-- Chapter 01: Creativity -->
+        <div class="hero__panel" id="panel01">
+          <div class="chapter-badge">
+            <span class="chapter-badge__num">01</span>
+            <span class="chapter-badge__label" data-zh="創意發想">Creativity</span>
+          </div>
+          <h2 class="hero__chapter-title" data-zh="創意靈感<br/>來自<br/>生活的累積">Ideas<br/>grow from<br/>everyday life</h2>
+          <p class="hero__chapter-sub" data-zh="最好的點子都藏在生活的小事裡。">The best ideas hide in everyday things.</p>
+          <ul class="chapter-tags">
+            <li data-zh="使用者研究">User Research</li>
+            <li data-zh="概念發想">Ideation</li>
+            <li data-zh="草圖構思">Concept Sketching</li>
+          </ul>
+        </div>
+
+        <!-- Chapter 02: Data Analysis -->
+        <div class="hero__panel" id="panel02">
+          <div class="chapter-badge">
+            <span class="chapter-badge__num">02</span>
+            <span class="chapter-badge__label" data-zh="數據分析">Data Analysis</span>
+          </div>
+          <h2 class="hero__chapter-title" data-zh="用數據說話<br/>讓設計有策略">Let data<br/>shape<br/>strategy</h2>
+          <p class="hero__chapter-sub" data-zh="數據不只是驗證，更是方向。">Data isn't just validation — it's direction.</p>
+          <ul class="chapter-tags">
+            <li data-zh="可用性測試">Usability Testing</li>
+            <li data-zh="漏斗分析">Funnel Analysis</li>
+            <li data-zh="A/B 測試">A/B Testing</li>
+          </ul>
+        </div>
+
+        <!-- Chapter 03: Design Output -->
+        <div class="hero__panel" id="panel03">
+          <div class="chapter-badge">
+            <span class="chapter-badge__num">03</span>
+            <span class="chapter-badge__label" data-zh="設計產出">Design Output</span>
+          </div>
+          <h2 class="hero__chapter-title" data-zh="每個像素<br/>都有<br/>它的理由">Every pixel<br/>has a<br/>reason</h2>
+          <p class="hero__chapter-sub" data-zh="魔鬼藏在細節裡，設計師 aka 鷹眼專家。">The devil's in the details. Designer, aka eagle-eye specialist.</p>
+          <ul class="chapter-tags">
+            <li data-zh="UI 設計">UI Design</li>
+            <li data-zh="設計系統">Design Systems</li>
+            <li data-zh="開發交付">Dev Handoff</li>
+          </ul>
+          <a href="#works" class="btn btn--primary hero__cta" data-zh="查看作品">View My Work</a>
+        </div>
+
+      </div>
+
+      <!-- Right: progress indicator -->
+      <nav class="chapter-nav" aria-label="Chapters">
+        <!-- Row: track behind dots -->
+        <div class="chapter-nav__row">
+          <div class="chapter-nav__track">
+            <div class="chapter-nav__fill" id="chapterFill"></div>
+          </div>
+          <ul class="chapter-nav__items">
+            <li class="chapter-nav__item" data-chapter="0">
+              <button class="chapter-nav__dot" aria-label="Intro"></button>
+            </li>
+            <li class="chapter-nav__item" data-chapter="1">
+              <button class="chapter-nav__dot" aria-label="Creativity"></button>
+              <span class="chapter-nav__label" data-zh="創意發想">Creativity</span>
+            </li>
+            <li class="chapter-nav__item" data-chapter="2">
+              <button class="chapter-nav__dot" aria-label="Data Analysis"></button>
+              <span class="chapter-nav__label" data-zh="數據分析">Data Analysis</span>
+            </li>
+            <li class="chapter-nav__item" data-chapter="3">
+              <button class="chapter-nav__dot" aria-label="Design Output"></button>
+              <span class="chapter-nav__label" data-zh="設計產出">Design Output</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Scroll progress bar (top) -->
+      <div class="hero__progress-bar" id="heroProgressBar"></div>
+
+    </div><!-- /hero-sticky -->
+  </div><!-- /hero-scroll -->
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__left">
+          <p class="label" data-zh="關於我">About Me</p>
+          <h2 class="section-title" data-zh="帶來<br/>實質改變<br/>的設計">Design that<br/>moves the<br/>needle.</h2>
+        </div>
+        <div class="about__right">
+          <p class="about__bio" data-zh="嗨！我是 Sharon，六年的數位產品開發經驗。過去做過 AI SaaS、電商到品牌官網建置。最近專注於怎麼跟 AI 好好共事。">
+            I'm Sharon Chen, six years into building digital products — from AI SaaS and
+            e-commerce to brand websites. Lately I've been focused on how to work well with AI.
+          </p>
+          <p class="about__bio" data-zh="永遠先做研究再做設計。找出真正值得解的問題。驅動我的是好奇心，還有喝有點多的手搖飲。">
+            Research before design, always. Find the problem actually worth solving. What
+            drives me is curiosity — and slightly too much bubble tea.
+          </p>
+          <div class="about__skills">
+            <div class="skill-group">
+              <p class="skill-group__title" data-zh="專業能力">Craft</p>
+              <ul>
+                <li data-zh="UX / UI 設計">UX / UI Design</li>
+                <li data-zh="使用者研究與測試">User Research &amp; Testing</li>
+                <li data-zh="資訊架構">Information Architecture</li>
+                <li data-zh="設計系統">Design Systems</li>
+                <li data-zh="互動與原型">Interaction &amp; Prototyping</li>
+                <li data-zh="AI 輔助設計流程">AI-Augmented Design Workflow</li>
+                <li data-zh="提示工程與 JTBD">Prompt Engineering &amp; JTBD</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group__title" data-zh="工具">Tools</p>
+              <ul>
+                <li>Figma / Adobe Suite</li>
+                <li>Claude / ChatGPT</li>
+                <li>Midjourney / DALL-E</li>
+                <li>Claude Code · Vibe Coding</li>
+                <li>Miro / Notion / Jira / HTML5</li>
+              </ul>
+            </div>
+          </div>
+          <div class="about__experience">
+            <p class="skill-group__title" data-zh="工作經歷">Experience</p>
+            <ul class="about__exp-list">
+              <li>
+                <span class="exp__role" data-zh="Product Designer">Product Designer</span>
+                <span class="exp__company">Palup · AI SaaS</span>
+                <span class="exp__year" data-zh="2025 – 至今">2025 – Present</span>
+              </li>
+              <li>
+                <span class="exp__role" data-zh="Product Designer">Product Designer</span>
+                <span class="exp__company" data-zh="momoshop · 電商">momoshop · E-commerce</span>
+                <span class="exp__year">2023 – 2024</span>
+              </li>
+              <li>
+                <span class="exp__role" data-zh="視覺 / UI 設計師">Visual / UI Designer</span>
+                <span class="exp__company" data-zh="Sugarfun Creative · 代理商">Sugarfun Creative · Agency</span>
+                <span class="exp__year">2016 – 2022</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="works section" id="works">
+    <div class="container">
+      <div class="works__header">
+        <p class="label" data-zh="精選作品">Selected Works</p>
+        <h2 class="section-title" data-zh="作品">Projects</h2>
+      </div>
+
+      <div class="works__grid">
+
+        <!-- Case 1: Fed APP -->
+        <article class="work-card work-card--featured" data-index="01">
+          <a href="works/fed-app.html" class="work-card__img-wrap" style="view-transition-name: case-hero; display: block;">
+            <img class="work-card__img" src="assets/img/fed-app/Hero.jpg" alt="Fed APP case study cover" loading="lazy" />
+          </a>
+          <div class="work-card__body">
+            <div class="work-card__meta">
+              <span class="tag" data-zh="行動裝置">Mobile</span>
+              <span class="tag">UI/UX</span>
+            </div>
+            <h3 class="work-card__title">Fed APP</h3>
+            <p class="work-card__desc" data-zh="遠東百貨集點 App 的改版——更順的兌換流程、遊戲化的集點機制，以及更具質感的視覺語言。">A redesign of Far Eastern's loyalty app — a faster redemption flow, gamified point-earning, and a more premium visual language.</p>
+            <a href="works/fed-app.html" class="work-card__link" data-zh="查看案例 →">View Case Study →</a>
+          </div>
+        </article>
+
+        <!-- Case 2: Fubon Financial -->
+        <article class="work-card" data-index="02">
+          <a href="works/fubon.html" class="work-card__img-wrap" style="display:block;">
+            <img class="work-card__img" src="assets/img/fubon/fubon-1.webp" alt="Fubon Financial website redesign cover" loading="lazy" />
+          </a>
+          <div class="work-card__body">
+            <div class="work-card__meta">
+              <span class="tag" data-zh="網頁設計">Web Design</span>
+              <span class="tag" data-zh="金融">Finance</span>
+            </div>
+            <h3 class="work-card__title">Fubon Financial</h3>
+            <p class="work-card__desc" data-zh="為台灣數一數二的金融集團改版首頁——用更清楚的視覺層次與資訊架構，在企業信賴感與使用者參與之間取得平衡。">Homepage redesign for one of Taiwan's largest financial groups — balancing corporate credibility with engagement through clearer visual hierarchy and information architecture.</p>
+            <a href="works/fubon.html" class="work-card__link" data-zh="查看案例 →">View Case Study →</a>
+          </div>
+        </article>
+
+        <!-- Case 3: AI Agent B2B SaaS (protected page) -->
+        <article class="work-card work-card--locked" data-index="05">
+          <a href="works/backend.html" class="work-card__img-wrap" style="display:block;">
+            <img class="work-card__img" src="assets/img/backend/000.png" alt="AI Agent B2B SaaS platform cover" loading="lazy" />
+          </a>
+          <div class="work-card__body">
+            <div class="work-card__meta">
+              <span class="tag" data-zh="B2B SaaS">B2B SaaS</span>
+            </div>
+            <h3 class="work-card__title" data-zh="AI Agent B2B SaaS 平台 🔒">AI Agent B2B SaaS Platform 🔒</h3>
+            <p class="work-card__desc" data-zh="內容受保護，需要密碼才能查看——面試時可提供。">Password-protected — available on request.</p>
+            <a href="works/backend.html" class="work-card__link" data-zh="輸入密碼 →">Enter password →</a>
+          </div>
+        </article>
+
+        <!-- Case 4: UNIQLO -->
+        <article class="work-card" data-index="03">
+          <a href="works/uniqlo.html" class="work-card__img-wrap" style="display:block;">
+            <img class="work-card__img" src="assets/img/uniqlo/uniqlo-1.webp" alt="UNIQLO social media campaign cover" loading="lazy" />
+          </a>
+          <div class="work-card__body">
+            <div class="work-card__meta">
+              <span class="tag" data-zh="行銷企劃">Campaign</span>
+              <span class="tag" data-zh="視覺設計">Visual Design</span>
+            </div>
+            <h3 class="work-card__title">UNIQLO Campaign</h3>
+            <p class="work-card__desc" data-zh="UNIQLO 台灣的社群企劃，以聊天機器人性格測驗提供個人化的穿搭推薦。">A social campaign for UNIQLO Taiwan, built around a chatbot personality quiz that delivers personalized outfit recommendations.</p>
+            <a href="works/uniqlo.html" class="work-card__link" data-zh="查看案例 →">View Case Study →</a>
+          </div>
+        </article>
+
+        <!-- Case 4: DIOR -->
+        <article class="work-card" data-index="04">
+          <a href="works/dior.html" class="work-card__img-wrap" style="display:block;">
+            <img class="work-card__img" src="assets/img/dior/dior-1.webp" alt="DIOR social media campaign cover" loading="lazy" />
+          </a>
+          <div class="work-card__body">
+            <div class="work-card__meta">
+              <span class="tag" data-zh="精品品牌">Luxury Brand</span>
+              <span class="tag" data-zh="行銷企劃">Campaign</span>
+            </div>
+            <h3 class="work-card__title">DIOR Campaign</h3>
+            <p class="work-card__desc" data-zh="Dior 快閃店的行動企劃——以互動測驗，將店內體驗轉化為可分享的數位紀念。">A mobile campaign for a Dior pop-up — an interactive quiz that turns the in-store experience into a shareable digital keepsake.</p>
+            <a href="works/dior.html" class="work-card__link" data-zh="查看案例 →">View Case Study →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="works__footer">
+        <a href="#contact" class="btn btn--ghost" data-zh="有專案？聊聊吧。">Got a project? Let's talk.</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS STRIP -->
+  <section class="process section">
+    <div class="container">
+      <div class="process__header">
+        <p class="label" data-zh="我的工作方式">How I Work</p>
+        <h2 class="section-title" data-zh="設計流程">The Process</h2>
+      </div>
+      <div class="process__inner">
+        <div class="process__step" data-index="01">
+          <span class="process__num">01</span>
+          <h4 data-zh="探索">Discover</h4>
+          <p data-zh="研究、訪談、競品分析">Research, interviews, competitive audit</p>
+        </div>
+        <div class="process__connector"><span></span></div>
+        <div class="process__step" data-index="02">
+          <span class="process__num">02</span>
+          <h4 data-zh="定義">Define</h4>
+          <p data-zh="洞察整合、問題界定">Insights synthesis, problem framing</p>
+        </div>
+        <div class="process__connector"><span></span></div>
+        <div class="process__step" data-index="03">
+          <span class="process__num">03</span>
+          <h4 data-zh="設計">Design</h4>
+          <p data-zh="線框稿、原型、測試">Wireframes, prototypes, testing</p>
+        </div>
+        <div class="process__connector"><span></span></div>
+        <div class="process__step" data-index="04">
+          <span class="process__num">04</span>
+          <h4 data-zh="交付">Deliver</h4>
+          <p data-zh="交付、驗收、迭代">Handoff, QA, iteration</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact__inner">
+        <p class="label" data-zh="聯絡我">Get In Touch</p>
+        <h2 class="section-title contact__title" data-zh="來個<br/>bubble tea chat 吧">Let's chat<br/>over bubble tea</h2>
+        <div class="contact__links">
+          <a href="mailto:howluoeyes@gmail.com" class="btn btn--primary" data-zh="打聲招呼">Say Hello</a>
+          <a href="https://linkedin.com/in/sharon-YCH" class="btn btn--ghost" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.behance.net/howluoeyesd200" class="btn btn--ghost" target="_blank" rel="noopener">Behance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__copy" data-zh="© 2025 Sharon Chen. 版權所有。">© 2025 Sharon Chen. All rights reserved.</p>
+      <p class="footer__craft" data-zh="用好奇心、HTML 和 Claude Code 寫成。">Made with curiosity, HTML, and Claude Code.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/i18n.js"></script>
+</body>
+</html>
