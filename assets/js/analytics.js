@@ -26,10 +26,10 @@
 
   // ---- click events ----
   function bind() {
-    // CV download
-    document.querySelectorAll('a[href$="SharonChen_CV.pdf"]').forEach(function (a) {
+    // CV download (EN or 中 resume)
+    document.querySelectorAll('a[href*="resume-sharonchen"]').forEach(function (a) {
       a.addEventListener('click', function () {
-        track('cv_download', { page: location.pathname });
+        track('cv_download', { lang: /-ch\.pdf/.test(a.getAttribute('href')) ? 'zh' : 'en', page: location.pathname });
       });
     });
 

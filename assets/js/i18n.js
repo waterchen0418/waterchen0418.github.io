@@ -11,6 +11,10 @@
   // Snapshot the original English once.
   swappables.forEach(el => { el.dataset.en = el.innerHTML.trim(); });
 
+  // Links whose href differs by language (e.g. EN / 中 CV). Snapshot the EN href.
+  const hrefSwappables = Array.from(document.querySelectorAll('[data-href-zh]'));
+  hrefSwappables.forEach(el => { el.dataset.hrefEn = el.getAttribute('href'); });
+
   const btn      = document.getElementById('langBtn');
   const menu     = document.getElementById('langMenu');
   const current  = document.getElementById('langCurrent');
@@ -20,6 +24,9 @@
     const zh = lang === 'zh';
     swappables.forEach(el => {
       el.innerHTML = zh ? el.dataset.zh : el.dataset.en;
+    });
+    hrefSwappables.forEach(el => {
+      el.setAttribute('href', zh ? el.dataset.hrefZh : el.dataset.hrefEn);
     });
     document.documentElement.lang = zh ? 'zh-Hant' : 'en';
     if (current) current.textContent = zh ? '中' : 'EN';
