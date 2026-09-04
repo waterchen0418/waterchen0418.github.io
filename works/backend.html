@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Protected Project — Sharon Chen</title>
   <link rel="icon" href="../assets/img/cube.ico" sizes="32x32" />
+  <script src="../assets/js/analytics.js"></script>
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -174,6 +175,7 @@
       try { ok = (await sha256Hex(input.value)) === PASS_HASH; } catch (e) { ok = false; }
       if (ok) {
         try { sessionStorage.setItem(STORE_KEY, '1'); } catch (e) {}
+        if (window.trackEvent) window.trackEvent('protected_unlock');
         reveal();
       } else {
         errEl.hidden = false;
