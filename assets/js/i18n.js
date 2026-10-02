@@ -64,6 +64,31 @@
     });
   }
 
+  // ---- Mobile nav (hamburger) toggle ----
+  const navEl = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  if (navEl && navToggle) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = navEl.classList.toggle('nav--open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    // close when a nav link is tapped
+    navEl.querySelectorAll('.nav__links a').forEach(a => {
+      a.addEventListener('click', () => {
+        navEl.classList.remove('nav--open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    // close when tapping outside the nav
+    document.addEventListener('click', (e) => {
+      if (navEl.classList.contains('nav--open') && !navEl.contains(e.target)) {
+        navEl.classList.remove('nav--open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Initial language (default English)
   let saved = 'en';
   try { saved = localStorage.getItem(STORAGE_KEY) || 'en'; } catch (e) {}

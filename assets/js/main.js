@@ -11,6 +11,19 @@ const progressBar = document.getElementById('heroProgressBar');
 const chapterFill = document.getElementById('chapterFill');
 const navItems    = document.querySelectorAll('.chapter-nav__item');
 
+// Force background autoplay (mobile Safari shows a play button otherwise)
+if (heroVideo) {
+  heroVideo.muted = true;
+  heroVideo.setAttribute('muted', '');
+  heroVideo.playsInline = true;
+  const tryPlay = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
+  tryPlay();
+  heroVideo.addEventListener('loadeddata', tryPlay, { once: true });
+  ['touchstart', 'pointerdown', 'click'].forEach(ev =>
+    document.addEventListener(ev, tryPlay, { once: true, passive: true })
+  );
+}
+
 const panels = [
   document.getElementById('panelIntro'),
   document.getElementById('panel01'),
