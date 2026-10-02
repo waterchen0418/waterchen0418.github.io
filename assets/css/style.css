@@ -1207,51 +1207,51 @@ img, video { display: block; max-width: 100%; }
   .nav__links a:hover { background: var(--bg-alt); }
   .btn--cv { font-size: 15px; border: none; color: var(--text-mid); }
   .btn--cv:hover { background: var(--bg-alt); color: var(--blue-mid); transform: none; box-shadow: none; }
-  /* Language switcher: inline segmented toggle at the foot of the mobile menu */
+  /* Language switcher: compact segmented control at the foot of the mobile menu */
   .lang-switch {
     width: 100%;
     margin-top: 6px;
-    padding-top: 10px;
+    padding: 10px 12px 2px;
     border-top: 1px solid var(--border);
   }
   .lang-switch__btn { display: none; }
   .lang-switch__menu {
     position: static;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    gap: 6px;
+    align-self: flex-start;
+    gap: 2px;
     min-width: 0;
-    background: transparent;
+    background: var(--bg-alt);
     box-shadow: none;
     border: none;
-    border-radius: 0;
-    padding: 0;
+    border-radius: 100px;
+    padding: 3px;
     margin: 0;
     opacity: 1;
     visibility: visible;
     transform: none;
   }
-  .lang-switch__menu li { flex: 1; }
   .lang-switch__opt {
-    width: 100%;
+    width: auto;
     text-align: center;
-    padding: 10px 12px;
-    font-size: 15px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg-alt);
-    color: var(--text-mid);
+    padding: 5px 14px;
+    font-size: 13px;
+    border: none;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-soft, var(--text-mid));
   }
   .lang-switch__opt:hover {
-    background: var(--bg-alt);
+    background: transparent;
     color: var(--text-mid);
   }
   .lang-switch__opt[aria-selected="true"],
   .lang-switch__opt[aria-selected="true"]:hover {
-    background: var(--blue-mid);
-    color: #fff;
-    border-color: var(--blue-mid);
+    background: var(--surface);
+    color: var(--blue-mid);
     font-weight: 600;
+    box-shadow: 0 1px 3px rgba(30, 60, 90, 0.12);
   }
 
   /* Hero video: base position for portrait screens */
