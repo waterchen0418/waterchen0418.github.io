@@ -1203,6 +1203,7 @@ img, video { display: block; max-width: 100%; }
     padding: 11px 12px;
     border-radius: 8px;
     font-size: 15px;
+    text-align: center;
   }
   .nav__links a:hover { background: var(--bg-alt); }
   .btn--cv { font-size: 15px; border: none; color: var(--text-mid); }
@@ -1213,13 +1214,13 @@ img, video { display: block; max-width: 100%; }
     margin-top: 6px;
     padding: 10px 12px 2px;
     border-top: 1px solid var(--border);
+    text-align: center;
   }
   .lang-switch__btn { display: none; }
   .lang-switch__menu {
     position: static;
     display: inline-flex;
     flex-direction: row;
-    align-self: flex-start;
     gap: 2px;
     min-width: 0;
     background: var(--bg-alt);
