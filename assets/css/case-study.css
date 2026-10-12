@@ -365,9 +365,12 @@
 }
 .cs-lock__back:hover { color: var(--blue-mid); }
 
-/* ---- Image loading skeleton (shimmer) ---- */
-.cs-screen-img,
-.cs-hero__cover {
+/* ---- Image loading: skeleton until fully loaded, then fade the whole image in ---- */
+.cs-shot {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
   background-color: #eceff3;
   background-image: linear-gradient(100deg,
     rgba(255, 255, 255, 0) 30%,
@@ -377,15 +380,27 @@
   background-repeat: no-repeat;
   animation: csImgShimmer 1.3s ease-in-out infinite;
 }
-.cs-screen-img.is-loaded,
-.cs-hero__cover.is-loaded {
+.cs-shot--hero { border-radius: 0; }
+/* The image is hidden while it downloads, so it never paints half-drawn;
+   it fades in only once fully loaded. */
+.cs-shot > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.cs-shot.is-loaded {
   background-image: none;
+  background-color: transparent;
   animation: none;
 }
+.cs-shot.is-loaded > img { opacity: 1; }
 @keyframes csImgShimmer {
   from { background-position: 150% 0; }
   to   { background-position: -150% 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cs-screen-img, .cs-hero__cover { animation: none; }
+  .cs-shot { animation: none; }
+  .cs-shot > img { transition: none; }
 }

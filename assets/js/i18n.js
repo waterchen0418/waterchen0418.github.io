@@ -96,14 +96,21 @@
     });
   }
 
-  // ---- Image loading skeleton: drop the shimmer once each image is ready ----
-  document.querySelectorAll('.cs-screen-img, .cs-hero__cover').forEach(img => {
-    const done = () => img.classList.add('is-loaded');
+  // ---- Image loading skeleton: reveal each image only once it is fully loaded ----
+  // The image stays hidden (opacity 0) over a shimmer skeleton while it downloads,
+  // so it never shows half-drawn; we fade the whole image in on load/decode.
+  document.querySelectorAll('.cs-shot > img').forEach(img => {
+    const shot = img.parentElement;
+    const reveal = () => shot.classList.add('is-loaded');
+    const onReady = () => {
+      if (img.decode) { img.decode().then(reveal).catch(reveal); }
+      else { reveal(); }
+    };
     if (img.complete && img.naturalWidth > 0) {
-      done();
+      onReady();
     } else {
-      img.addEventListener('load', done, { once: true });
-      img.addEventListener('error', done, { once: true });
+      img.addEventListener('load', onReady, { once: true });
+      img.addEventListener('error', reveal, { once: true });
     }
   });
 
