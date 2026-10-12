@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protected Project — Sharon Chen</title>
+  <link rel="icon" href="../assets/img/cube.ico" sizes="32x32" />
+  <script src="../assets/js/analytics.js"></script>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/case-study.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html#works" class="nav__logo nav__back" data-zh="← 所有作品">← All Works</a>
+      <button class="nav__toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="../index.html#about" data-zh="關於">About</a></li>
+        <li><a href="../index.html#works" data-zh="作品">Works</a></li>
+        <li><a href="../index.html#contact" data-zh="聯絡">Contact</a></li>
+        <li><a href="../resume-sharonchen-en.pdf" data-href-zh="../resume-sharonchen-ch.pdf" target="_blank" rel="noopener" data-zh="履歷">CV</a></li>
+        <li class="lang-switch" id="langSwitch">
+          <button class="lang-switch__btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+            <span id="langCurrent">EN</span>
+            <svg class="lang-switch__chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="lang-switch__menu" id="langMenu" role="listbox" aria-label="Language">
+            <li><button class="lang-switch__opt" type="button" data-lang="en" role="option">English</button></li>
+            <li><button class="lang-switch__opt" type="button" data-lang="zh" role="option">中文</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- LOCK SCREEN -->
+  <section class="cs-lock" id="csLock">
+    <div class="cs-lock__card">
+      <div class="cs-lock__icon">🔒</div>
+      <h1 class="cs-lock__title" data-zh="保密專案">Protected Case Study</h1>
+      <p class="cs-lock__sub" data-zh="這是一個後台系統專案，內容受保護。請輸入密碼查看，密碼可於面試時提供。">This is a backend / internal-tool project. The content is protected — enter the password to view. Available on request.</p>
+      <form class="cs-lock__form" id="csLockForm">
+        <input type="password" class="cs-lock__input" id="csLockInput" placeholder="Password" autocomplete="off" aria-label="Password" />
+        <button type="submit" class="cs-lock__btn" data-zh="解鎖">Unlock</button>
+      </form>
+      <p class="cs-lock__error" id="csLockError" hidden data-zh="密碼不對，再試一次。">Wrong password — please try again.</p>
+      <a href="../index.html#works" class="cs-lock__back" data-zh="← 回到作品">← Back to works</a>
+    </div>
+  </section>
+
+  <!-- PROTECTED CONTENT (revealed after unlock) -->
+  <div id="csContent" hidden>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+      <img class="cs-hero__cover" src="../assets/img/momo/0.png" alt="momo 問問 — Front- and Back-Office CRM, cover" />
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-overview__grid">
+          <div class="cs-overview__main">
+            <p class="label" data-zh="案例研究 — 06">Case Study — 06</p>
+            <h1 class="cs-title" data-zh="momo 問問 前後台CRM系統">Front- and Back-Office CRM</h1>
+            <p class="cs-lead" data-zh="momo 問問要處理的，是電商平台上三方的溝通：平台、商店，還有消費者。當時 momo 正從純 2C 零售轉向 2B2C、開始讓商家進駐，我負責設計消費者端的聊天功能「問問」，以及讓這些對話（包含後續的爭議）能一直走下去的客服後台。">momo 問問 is about getting the three sides of a marketplace — platform, stores, and shoppers — talking to each other. At the time, momo was shifting from a pure 2C retailer toward a 2B2C marketplace and opening up to third-party stores. I designed the shopper-facing chat, 問問, and the customer-service back office that keeps those conversations moving, disputes included.</p>
+          </div>
+          <div class="cs-overview__meta">
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="角色">Role</p>
+              <p class="cs-meta__value" data-zh="需求訪談 · 流程規劃 · 介面設計 · 規格文件">Research · Flows · UI · Specs</p>
+            </div>
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="平台">Platform</p>
+              <p class="cs-meta__value" data-zh="行動 App · 內部後台">Mobile App · Internal Tool</p>
+            </div>
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="團隊">Team</p>
+              <p class="cs-meta__value" data-zh="PM 1 · RD 3 · 設計 1">PM 1 · RD 3 · Designer 1</p>
+            </div>
+            <div class="cs-meta-item">
+              <p class="cs-meta__label" data-zh="工具">Tools</p>
+              <p class="cs-meta__value">Figma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 — CHALLENGE -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="01 — 挑戰">01 — Challenge</p>
+          <h2 class="cs-section__title" data-zh="三方角色，一個對話">Three Sides, One Conversation</h2>
+          <p class="cs-body" data-zh="商家一進駐，三個目標完全不一樣的角色就得一起運作。平台要訂規則、把系統搭起來；商店想要好上手、好做生意；消費者只希望交易順、售後有人管。而我要做的，就是讓這三邊的溝通不卡住。">The moment stores came onboard, three groups with very different goals had to work together. The platform needed to set the rules and build the system. Stores wanted it easy to run their business. Shoppers just wanted a smooth purchase and someone to turn to afterwards. My job was to keep the communication between them from breaking down.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS: three-party relationship -->
+    <section class="cs-screens" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-stack">
+          <img class="cs-screen-img" src="../assets/img/momo/chart-roles.png" alt="The three-party relationship: platform, store, and customer" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 — DESIGN: shopper chat -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="02 — 設計">02 — Design</p>
+          <h2 class="cs-section__title" data-zh="用聊天室，接住每個提問">Questions, Handled in Chat</h2>
+          <p class="cs-body" data-zh="消費者和商店之間要怎麼聊？我選了大家最熟的方式：聊天室，也就是「問問」。它就放在店鋪首頁和商品頁上，想問什麼當下就能問，不用特地跳出去。">How should shoppers and stores actually talk? I went with the format everyone already knows: a chat thread, 問問. It sits right on the store page and the product page, so a question can happen on the spot, without anyone having to leave what they were looking at.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS: shopper chat -->
+    <section class="cs-screens" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-stack">
+          <img class="cs-screen-img" src="../assets/img/momo/screens-chat.png" alt="問問 chat opened from the store page and the product page" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — PROCESS: dispute / platform intervention -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="03 — 流程">03 — Process</p>
+          <h2 class="cs-section__title" data-zh="當交易出了問題">When a Deal Goes Wrong</h2>
+          <p class="cs-body" data-zh="但交易不是每次都能順利收場。遇到有爭議的訂單，我把「平台介入」的流程整個攤開來，橫跨客戶、商店、平台客服三方，讓每一步都清楚：接下來換誰動作、平台又是在哪個時間點進來協調。">But not every order wraps up smoothly. For the ones that turn into disputes, I laid out the whole platform-intervention flow across the customer, the store, and platform support, so each step is clear: who acts next, and at what point the platform comes in to mediate.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS: flow + dispute -->
+    <section class="cs-screens" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-stack">
+          <img class="cs-screen-img" src="../assets/img/momo/chart-flow.png" alt="Platform-intervention flow across customer, store, and support" />
+          <img class="cs-screen-img" src="../assets/img/momo/screens-dispute.png" alt="Applying for platform intervention from the chat" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 — A JUDGMENT CALL: entry visibility -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="04 — 權衡">04 — A Judgment Call</p>
+          <h2 class="cs-section__title" data-zh="「申請平台介入」該多明顯？">How Visible Should "Ask the Platform" Be?</h2>
+          <p class="cs-body" data-zh="這裡有個很真實的兩難。營運希望「平台介入」的入口夠明顯，使用者真的需要時才找得到路；客服卻怕太明顯，那樣大小事都會被丟給平台。所以我的任務是說服利害關係人：除了利用卡控機制，確保真的有訂單問題才能申請平台介入之外，在 UI 入口上也有妥協，把入口收進「＋」選單：要用的時候找得到，但平常使用並不明顯。">This was a genuinely tricky trade-off. Operations wanted the platform-intervention entry to be obvious, so people could find it when they really needed it; customer service worried that if it were too obvious, every little thing would get dumped on the platform. So my job became convincing the stakeholders of a two-part answer: a gating mechanism that only lets a case reach platform intervention when there's a real order problem, plus a compromise on the UI — the entry lives inside the "＋" menu, findable when you need it but not something you notice day to day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 — THE BACK OFFICE -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="05 — 後台">05 — The Back Office</p>
+          <h2 class="cs-section__title" data-zh="讓客服一上手就會用的後台">A Back Office That Felt Familiar</h2>
+          <p class="cs-body" data-zh="客服也需要一個順手的地方處理這些案件。後台我盡量沿用他們本來就習慣的操作邏輯，把每一件案子做成一段聊天，再自動把相關的訂單資訊帶進來，讓他們少按幾下、也少猜一點。">Customer service needed a workspace of their own for all this. I kept the back office close to the way they already worked, turned each case into a single chat thread, and pulled the relevant order details in automatically, so handling a case meant fewer clicks and less guessing about each order.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS: back office -->
+    <section class="cs-screens" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-stack">
+          <img class="cs-screen-img" src="../assets/img/momo/screens-backend.png" alt="The customer-service back office: case list with filters" />
+          <img class="cs-screen-img" src="../assets/img/momo/screens-backend-2.png" alt="Case detail handled as a chat thread with order info pulled in" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 — IMPACT -->
+    <section class="section">
+      <div class="container">
+        <div class="cs-block">
+          <p class="label" data-zh="06 — 成果">06 — Impact</p>
+          <h2 class="cs-section__title" data-zh="成為後續開發的基礎">Adopted as the Foundation</h2>
+          <p class="cs-body" data-zh="最後，這套架構被團隊採用，也成了後面幾個功能繼續長出來的基礎。">In the end, the structure was adopted by the team, and became the base that later features were built on.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE NAV -->
+    <div class="cs-nav-cases section" style="padding-top: 0;">
+      <div class="container">
+        <div class="cs-nav-cases__inner">
+          <a href="../index.html#works" class="btn btn--ghost" data-zh="← 所有作品">← All Works</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer__copy" data-zh="© 2025 Sharon Chen. 版權所有。">© 2025 Sharon Chen. All rights reserved.</p>
+        <p class="footer__craft" data-zh="用好奇心、HTML 和 Claude Code 寫成。">Made with curiosity, HTML, and Claude Code.</p>
+      </div>
+    </footer>
+
+  </div><!-- /csContent -->
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ---- Password gate (client-side; deters casual visitors, not real security) ----
+    // Hash of the current password (SHA-256, hex). Password: Sharon2026
+    const PASS_HASH = '19202c69416293df58b3c6b83331d279054fea476b620fb8fd78396e13a4daed';
+    const STORE_KEY = 'momoUnlocked';
+    const lock = document.getElementById('csLock');
+    const content = document.getElementById('csContent');
+    const form = document.getElementById('csLockForm');
+    const input = document.getElementById('csLockInput');
+    const errEl = document.getElementById('csLockError');
+
+    async function sha256Hex(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    function reveal() {
+      lock.hidden = true;
+      lock.style.display = 'none';
+      content.hidden = false;
+    }
+    try { if (sessionStorage.getItem(STORE_KEY) === '1') reveal(); } catch (e) {}
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errEl.hidden = true;
+      let ok = false;
+      try { ok = (await sha256Hex(input.value)) === PASS_HASH; } catch (e) { ok = false; }
+      if (ok) {
+        try { sessionStorage.setItem(STORE_KEY, '1'); } catch (e) {}
+        if (window.trackEvent) window.trackEvent('protected_unlock');
+        reveal();
+      } else {
+        errEl.hidden = false;
+        input.value = '';
+        input.focus();
+      }
+    });
+  </script>
+  <script src="../assets/js/i18n.js"></script>
+
+</body>
+</html>
