@@ -99,6 +99,9 @@
   // ---- Image loading skeleton: reveal each image only once it is fully loaded ----
   // The image stays hidden (opacity 0) over a shimmer skeleton while it downloads,
   // so it never shows half-drawn; we fade the whole image in on load/decode.
+  // Flag enables the "hide until loaded" CSS only when this script runs, so a
+  // missing/stale script never leaves images stuck invisible.
+  document.documentElement.classList.add('js-img-skeleton');
   document.querySelectorAll('.cs-shot > img').forEach(img => {
     const shot = img.parentElement;
     const reveal = () => shot.classList.add('is-loaded');

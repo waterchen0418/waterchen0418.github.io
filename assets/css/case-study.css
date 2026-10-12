@@ -381,12 +381,15 @@
   animation: csImgShimmer 1.3s ease-in-out infinite;
 }
 .cs-shot--hero { border-radius: 0; }
-/* The image is hidden while it downloads, so it never paints half-drawn;
-   it fades in only once fully loaded. */
 .cs-shot > img {
   display: block;
   width: 100%;
   height: auto;
+}
+/* The image is hidden while it downloads, so it never paints half-drawn; it
+   fades in only once fully loaded. Gated on .js-img-skeleton (added by JS) so
+   that if the script is missing/stale the images still show normally. */
+.js-img-skeleton .cs-shot > img {
   opacity: 0;
   transition: opacity 0.45s ease;
 }
@@ -395,7 +398,7 @@
   background-color: transparent;
   animation: none;
 }
-.cs-shot.is-loaded > img { opacity: 1; }
+.js-img-skeleton .cs-shot.is-loaded > img { opacity: 1; }
 @keyframes csImgShimmer {
   from { background-position: 150% 0; }
   to   { background-position: -150% 0; }
