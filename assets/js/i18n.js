@@ -15,6 +15,10 @@
   const hrefSwappables = Array.from(document.querySelectorAll('[data-href-zh]'));
   hrefSwappables.forEach(el => { el.dataset.hrefEn = el.getAttribute('href'); });
 
+  // Images whose src differs by language (e.g. EN / 中 charts). Snapshot the EN src.
+  const srcSwappables = Array.from(document.querySelectorAll('[data-src-zh]'));
+  srcSwappables.forEach(el => { el.dataset.srcEn = el.getAttribute('src'); });
+
   const btn      = document.getElementById('langBtn');
   const menu     = document.getElementById('langMenu');
   const current  = document.getElementById('langCurrent');
@@ -27,6 +31,9 @@
     });
     hrefSwappables.forEach(el => {
       el.setAttribute('href', zh ? el.dataset.hrefZh : el.dataset.hrefEn);
+    });
+    srcSwappables.forEach(el => {
+      el.setAttribute('src', zh ? el.dataset.srcZh : el.dataset.srcEn);
     });
     document.documentElement.lang = zh ? 'zh-Hant' : 'en';
     if (current) current.textContent = zh ? '中' : 'EN';
