@@ -96,6 +96,17 @@
     });
   }
 
+  // ---- Image loading skeleton: drop the shimmer once each image is ready ----
+  document.querySelectorAll('.cs-screen-img, .cs-hero__cover').forEach(img => {
+    const done = () => img.classList.add('is-loaded');
+    if (img.complete && img.naturalWidth > 0) {
+      done();
+    } else {
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    }
+  });
+
   // Initial language (default English)
   let saved = 'en';
   try { saved = localStorage.getItem(STORAGE_KEY) || 'en'; } catch (e) {}
