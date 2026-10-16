@@ -365,20 +365,17 @@
 }
 .cs-lock__back:hover { color: var(--blue-mid); }
 
-/* ---- Image loading: skeleton until fully loaded, then fade the whole image in ---- */
+/* ---- Image loading: skeleton with a sweeping highlight, then fade the image in ----
+   The image stays hidden over a light-band "sweep" skeleton while it downloads,
+   so it never paints half-drawn; it fades in as a whole once fully loaded.
+   All of the hide/sweep behaviour is gated on .js-img-skeleton (added by JS),
+   so a missing or stale script never leaves images stuck invisible. */
 .cs-shot {
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-md);
-  background-color: #eceff3;
-  background-image: linear-gradient(100deg,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0) 70%);
-  background-size: 200% 100%;
-  background-repeat: no-repeat;
-  animation: csImgShimmer 1.3s ease-in-out infinite;
+  background-color: #e4e4e7; /* resting skeleton base */
 }
 .cs-shot--hero { border-radius: 0; }
 .cs-shot > img {
@@ -386,24 +383,32 @@
   width: 100%;
   height: auto;
 }
-/* The image is hidden while it downloads, so it never paints half-drawn; it
-   fades in only once fully loaded. Gated on .js-img-skeleton (added by JS) so
-   that if the script is missing/stale the images still show normally. */
 .js-img-skeleton .cs-shot > img {
+  position: relative;
+  z-index: 1;
   opacity: 0;
   transition: opacity 0.45s ease;
 }
-.cs-shot.is-loaded {
-  background-image: none;
-  background-color: transparent;
-  animation: none;
+/* the light band that sweeps left -> right while loading */
+.js-img-skeleton .cs-shot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent);
+  transform: translateX(-100%);
+  animation: csSweep 1.5s ease-in-out infinite;
 }
+.cs-shot.is-loaded { background-color: transparent; }
 .js-img-skeleton .cs-shot.is-loaded > img { opacity: 1; }
-@keyframes csImgShimmer {
-  from { background-position: 150% 0; }
-  to   { background-position: -150% 0; }
+.js-img-skeleton .cs-shot.is-loaded::before { content: none; }
+@keyframes csSweep {
+  to { transform: translateX(100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cs-shot { animation: none; }
-  .cs-shot > img { transition: none; }
+  .js-img-skeleton .cs-shot::before { animation: none; }
+  .js-img-skeleton .cs-shot > img { transition: none; }
 }
