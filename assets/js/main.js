@@ -172,33 +172,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 /* =============================================
-   REDESIGN TRIAL — motion covers, cursor pill, hero parallax, magnetic buttons
+   REDESIGN TRIAL — cursor-follow pill on work cards
    ============================================= */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  // ---- Motion covers: load + play only while the card is on screen.
-  // If playback is refused (e.g. iOS Low Power Mode) the static cover simply stays.
-  const covers = document.querySelectorAll('.work-card__video');
-  if (covers.length && !reduceMotion && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(({ target: v, isIntersecting }) => {
-        if (isIntersecting) {
-          if (!v.src) { v.src = v.dataset.src; }
-          const p = v.play();
-          if (p && p.then) p.then(() => v.classList.add('is-playing')).catch(() => {});
-        } else {
-          v.pause();
-        }
-      });
-    }, { threshold: 0.35 });
-    covers.forEach(v => {
-      v.muted = true;
-      v.addEventListener('playing', () => v.classList.add('is-playing'));
-      io.observe(v);
-    });
-  }
 
   if (!finePointer || reduceMotion) return;
 
@@ -230,33 +208,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     card.addEventListener('mouseleave', () => pill.classList.remove('is-on'));
   });
 
-  // ---- Hero mouse parallax: video layer drifts with the cursor, text drifts the other way
-  const heroSticky = document.querySelector('.hero-sticky');
-  const videoWrap  = document.querySelector('.hero__video-wrap');
-  const chapters   = document.querySelector('.hero__chapters');
-  if (heroSticky && videoWrap) {
-    heroSticky.addEventListener('mousemove', e => {
-      const r = heroSticky.getBoundingClientRect();
-      const nx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 … 0.5
-      const ny = (e.clientY - r.top) / r.height - 0.5;
-      videoWrap.style.transform = `translate3d(${nx * -36}px, ${ny * -24}px, 0)`;
-      if (chapters) chapters.style.transform = `translate3d(${nx * 10}px, ${ny * 8}px, 0)`;
-    });
-    heroSticky.addEventListener('mouseleave', () => {
-      videoWrap.style.transform = '';
-      if (chapters) chapters.style.transform = '';
-    });
-  }
-
-  // ---- Magnetic buttons
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.classList.add('is-magnetic');
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2);
-      const dy = e.clientY - (r.top + r.height / 2);
-      btn.style.transform = `translate(${dx * 0.25}px, ${dy * 0.35}px)`;
-    });
-    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-  });
 })();
