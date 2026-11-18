@@ -825,7 +825,6 @@ img, video { display: block; max-width: 100%; }
 }
 
 .work-card__img-wrap {
-  position: relative;
   aspect-ratio: 16/9;
   overflow: hidden;
 }
@@ -1441,3 +1440,8 @@ img, video { display: block; max-width: 100%; }
   .hero__title { font-size: clamp(32px, 9vw, 40px); }
   .hero__chapter-title { font-size: clamp(26px, 7.5vw, 34px); }
 }
+
+/* Cards without description/button: whole card is the link (stretched from the image link) */
+.work-card { position: relative; }
+.work-card__img-wrap::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.work-card__title { margin-bottom: 0; }
