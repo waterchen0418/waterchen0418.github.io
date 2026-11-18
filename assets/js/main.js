@@ -170,3 +170,93 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+
+/* =============================================
+   REDESIGN TRIAL — motion covers, cursor pill, hero parallax, magnetic buttons
+   ============================================= */
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // ---- Motion covers: load + play only while the card is on screen.
+  // If playback is refused (e.g. iOS Low Power Mode) the static cover simply stays.
+  const covers = document.querySelectorAll('.work-card__video');
+  if (covers.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(({ target: v, isIntersecting }) => {
+        if (isIntersecting) {
+          if (!v.src) { v.src = v.dataset.src; }
+          const p = v.play();
+          if (p && p.then) p.then(() => v.classList.add('is-playing')).catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.35 });
+    covers.forEach(v => {
+      v.muted = true;
+      v.addEventListener('playing', () => v.classList.add('is-playing'));
+      io.observe(v);
+    });
+  }
+
+  if (!finePointer || reduceMotion) return;
+
+  // ---- Cursor-follow pill on work cards
+  const pill = document.createElement('div');
+  pill.className = 'cursor-pill';
+  pill.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(pill);
+  document.documentElement.classList.add('has-cursor-pill');
+  let px = 0, py = 0, tx = 0, ty = 0, raf = null;
+  const follow = () => {
+    px += (tx - px) * 0.22; py += (ty - py) * 0.22;
+    pill.style.left = px + 'px'; pill.style.top = py + 'px';
+    raf = (Math.abs(tx - px) + Math.abs(ty - py) > 0.3) ? requestAnimationFrame(follow) : null;
+  };
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.addEventListener('mouseenter', e => {
+      const zh = document.documentElement.lang === 'zh-Hant';
+      const locked = card.classList.contains('work-card--locked');
+      pill.textContent = locked ? (zh ? '🔒 輸入密碼' : '🔒 Unlock') : (zh ? '查看案例' : 'View case');
+      px = tx = e.clientX; py = ty = e.clientY;
+      pill.style.left = px + 'px'; pill.style.top = py + 'px';
+      pill.classList.add('is-on');
+    });
+    card.addEventListener('mousemove', e => {
+      tx = e.clientX; ty = e.clientY;
+      if (!raf) raf = requestAnimationFrame(follow);
+    });
+    card.addEventListener('mouseleave', () => pill.classList.remove('is-on'));
+  });
+
+  // ---- Hero mouse parallax: video layer drifts with the cursor, text drifts the other way
+  const heroSticky = document.querySelector('.hero-sticky');
+  const videoWrap  = document.querySelector('.hero__video-wrap');
+  const chapters   = document.querySelector('.hero__chapters');
+  if (heroSticky && videoWrap) {
+    heroSticky.addEventListener('mousemove', e => {
+      const r = heroSticky.getBoundingClientRect();
+      const nx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 … 0.5
+      const ny = (e.clientY - r.top) / r.height - 0.5;
+      videoWrap.style.transform = `translate3d(${nx * -36}px, ${ny * -24}px, 0)`;
+      if (chapters) chapters.style.transform = `translate3d(${nx * 10}px, ${ny * 8}px, 0)`;
+    });
+    heroSticky.addEventListener('mouseleave', () => {
+      videoWrap.style.transform = '';
+      if (chapters) chapters.style.transform = '';
+    });
+  }
+
+  // ---- Magnetic buttons
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.classList.add('is-magnetic');
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      btn.style.transform = `translate(${dx * 0.25}px, ${dy * 0.35}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+})();

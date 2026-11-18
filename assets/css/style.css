@@ -31,6 +31,7 @@
    TOKENS
    ============================ */
 :root {
+  --page-max: 1024px; /* 960px content + 32px gutters */
   --bg:        #eef4fb;
   --bg-alt:    #f7fafd;
   --surface:   #ffffff;
@@ -74,7 +75,7 @@ img, video { display: block; max-width: 100%; }
    UTILITIES
    ============================ */
 .container {
-  max-width: 1160px;
+  max-width: var(--page-max);
   margin: 0 auto;
   padding: 0 32px;
 }
@@ -171,7 +172,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 .nav__inner {
-  max-width: 1160px;
+  max-width: var(--page-max);
   margin: 0 auto;
   padding: 0 32px;
   display: flex;
@@ -824,6 +825,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 .work-card__img-wrap {
+  position: relative;
   aspect-ratio: 16/9;
   overflow: hidden;
 }
@@ -1340,4 +1342,61 @@ img, video { display: block; max-width: 100%; }
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ============================
+   REDESIGN TRIAL — motion covers + interactions
+   ============================ */
+/* Motion cover: video sits over the static cover, fades in once playing */
+.work-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), transform 0.4s var(--ease);
+  pointer-events: none;
+}
+.work-card__video.is-playing { opacity: 1; }
+.work-card:hover .work-card__video { transform: scale(1.03); }
+
+/* Cursor-follow "View case" pill (desktop / fine pointer only) */
+.cursor-pill {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 200;
+  pointer-events: none;
+  padding: 10px 18px;
+  border-radius: 100px;
+  background: var(--text);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.cursor-pill.is-on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor-pill .work-card,
+  .has-cursor-pill .work-card a { cursor: none; }
+}
+
+/* Hero: mouse parallax moves the whole video layer (the video itself keeps its chapter zooms) */
+.hero__video-wrap {
+  inset: -24px;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.hero__chapters { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* Magnetic buttons */
+.btn.is-magnetic { transition: transform 0.25s var(--ease), background 0.25s, box-shadow 0.25s, color 0.25s, border-color 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__video-wrap, .hero__chapters { transition: none; transform: none !important; }
+  .cursor-pill { display: none; }
 }

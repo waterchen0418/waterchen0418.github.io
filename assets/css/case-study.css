@@ -412,3 +412,20 @@
   .js-img-skeleton .cs-shot::before { animation: none; }
   .js-img-skeleton .cs-shot > img { transition: none; }
 }
+
+/* Redesign trial: case hero cover follows the narrower page width */
+.cs-hero { padding-top: 92px; }
+.cs-hero .cs-shot--hero,
+.cs-hero .cs-hero__img {
+  width: calc(100% - 64px);
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.cs-hero .cs-hero__img { height: auto; aspect-ratio: 16 / 9; }
+@media (max-width: 768px) {
+  .cs-hero { padding-top: 76px; }
+  .cs-hero .cs-shot--hero,
+  .cs-hero .cs-hero__img { width: calc(100% - 40px); border-radius: var(--radius-md); }
+}
