@@ -1445,3 +1445,15 @@ img, video { display: block; max-width: 100%; }
 .work-card { position: relative; }
 .work-card__img-wrap::after { content: ''; position: absolute; inset: 0; z-index: 1; }
 .work-card__title { margin-bottom: 0; }
+
+/* Header spans the full width like the KV; side padding matches the KV text inset (72px) */
+.nav__inner { max-width: none; padding: 0 72px; }
+@media (max-width: 900px) { .nav__inner { padding: 0 32px; } }
+@media (max-width: 600px) { .nav__inner { padding: 0 24px; } }
+
+/* Fed APP now shares the first row with the new project */
+.work-card--featured { grid-column: auto; }
+.work-card--placeholder .work-card__img-wrap {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-alt); color: var(--text-soft); font-size: 13px;
+}
