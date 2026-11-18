@@ -196,7 +196,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     card.addEventListener('mouseenter', e => {
       const zh = document.documentElement.lang === 'zh-Hant';
       const locked = card.classList.contains('work-card--locked');
-      pill.textContent = locked ? (zh ? '🔒 輸入密碼' : '🔒 Unlock') : (zh ? '查看案例' : 'View case');
+      const external = card.querySelector('a[target="_blank"]');
+      pill.textContent = locked ? (zh ? '🔒 輸入密碼' : '🔒 Unlock')
+        : external ? (zh ? '前往 App Store ↗' : 'App Store ↗')
+        : (zh ? '查看案例' : 'View case');
       px = tx = e.clientX; py = ty = e.clientY;
       pill.style.left = px + 'px'; pill.style.top = py + 'px';
       pill.classList.add('is-on');
