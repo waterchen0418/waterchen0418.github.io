@@ -1457,3 +1457,30 @@ img, video { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-alt); color: var(--text-soft); font-size: 13px;
 }
+
+/* Work cards — inset image, title + arrow, small neutral tags (ref: raviraghul.me) */
+.work-card { padding: 8px; border: 1px solid var(--border); border-radius: 16px; }
+.work-card__img-wrap { border-radius: 10px; }
+.work-card__body { padding: 12px 6px 6px; }
+.work-card__head { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.work-card__title { font-size: 16px; font-weight: 600; line-height: 1.35; margin: 0; }
+.work-card__arrow {
+  flex-shrink: 0;
+  width: 14px; height: 14px;
+  color: var(--text-soft);
+  transition: transform 0.3s var(--ease), color 0.3s;
+}
+.work-card:hover .work-card__arrow { color: var(--blue-mid); transform: translate(2px, -2px); }
+.work-card:hover .work-card__arrow--lock { transform: none; }
+.work-card__meta { gap: 6px; margin: 0; }
+.work-card .tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-mid);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
