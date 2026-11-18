@@ -1433,12 +1433,12 @@ img, video { display: block; max-width: 100%; }
 }
 
 /* Hero (KV) type, scaled down to sit with the compact scale */
-.hero__title { font-size: clamp(36px, 3.4vw, 48px); line-height: 1.08; }
-.hero__chapter-title { font-size: clamp(30px, 2.8vw, 40px); line-height: 1.1; }
+.hero__title { font-size: clamp(44px, 4.2vw, 60px); line-height: 1.06; }
+.hero__chapter-title { font-size: clamp(36px, 3.4vw, 48px); line-height: 1.08; }
 .hero__sub, .hero__chapter-sub { font-size: 14px; }
 @media (max-width: 600px) {
-  .hero__title { font-size: clamp(32px, 9vw, 40px); }
-  .hero__chapter-title { font-size: clamp(26px, 7.5vw, 34px); }
+  .hero__title { font-size: clamp(36px, 10vw, 46px); }
+  .hero__chapter-title { font-size: clamp(30px, 8.5vw, 38px); }
 }
 
 /* Cards without description/button: whole card is the link (stretched from the image link) */
