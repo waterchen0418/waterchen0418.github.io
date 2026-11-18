@@ -31,6 +31,7 @@
    TOKENS
    ============================ */
 :root {
+  --kv-inset: clamp(72px, 10vw, 168px); /* KV text + header side inset */
   --page-max: 784px; /* 720px content + 32px gutters (compact scale trial) */
   --bg:        #eef4fb;
   --bg-alt:    #f7fafd;
@@ -1447,7 +1448,7 @@ img, video { display: block; max-width: 100%; }
 .work-card__title { margin-bottom: 0; }
 
 /* Header spans the full width like the KV; side padding matches the KV text inset (72px) */
-.nav__inner { max-width: none; padding: 0 72px; }
+.nav__inner { max-width: none; padding: 0 var(--kv-inset); }
 @media (max-width: 900px) { .nav__inner { padding: 0 32px; } }
 @media (max-width: 600px) { .nav__inner { padding: 0 24px; } }
 
@@ -1483,4 +1484,24 @@ img, video { display: block; max-width: 100%; }
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 2px 8px;
+}
+
+/* KV text pulled in from the edge so the smaller type reads as one focal block */
+@media (min-width: 901px) {
+  .hero__panel { left: var(--kv-inset); }
+  #panel01 { left: auto; right: var(--kv-inset); }
+}
+@media (min-width: 901px) {
+  .hero__overlay,
+  .hero__overlay[data-chapter="2"],
+  .hero__overlay[data-chapter="3"] {
+    background:
+      linear-gradient(to right, rgba(240,245,252,0.9) 0%, rgba(240,245,252,0.8) 22%, rgba(240,245,252,0.4) 48%, transparent 72%),
+      linear-gradient(to bottom, rgba(240,245,252,0.30) 0%, transparent 40%);
+  }
+  .hero__overlay[data-chapter="1"] {
+    background:
+      linear-gradient(to left, rgba(240,245,252,0.9) 0%, rgba(240,245,252,0.8) 22%, rgba(240,245,252,0.4) 48%, transparent 72%),
+      linear-gradient(to bottom, rgba(240,245,252,0.30) 0%, transparent 40%);
+  }
 }
