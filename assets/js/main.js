@@ -178,6 +178,28 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  // ---- Motion covers: desktop plays on hover, touch devices play while the card is on screen.
+  // If playback is refused (e.g. iOS Low Power Mode) the static cover simply stays.
+  if (!reduceMotion) {
+    document.querySelectorAll('.work-card__video').forEach(v => {
+      v.muted = true;
+      const play = () => {
+        if (!v.getAttribute('src')) v.src = v.dataset.src;
+        const p = v.play();
+        if (p && p.then) p.then(() => v.classList.add('is-playing')).catch(() => {});
+      };
+      const stop = () => { v.pause(); v.classList.remove('is-playing'); v.currentTime = 0; };
+      if (finePointer) {
+        const card = v.closest('.work-card');
+        card.addEventListener('mouseenter', play);
+        card.addEventListener('mouseleave', stop);
+      } else if ('IntersectionObserver' in window) {
+        new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? play() : stop())),
+          { threshold: 0.5 }).observe(v);
+      }
+    });
+  }
+
   if (!finePointer || reduceMotion) return;
 
   // ---- Cursor-follow pill on work cards

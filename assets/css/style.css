@@ -1505,3 +1505,15 @@ img, video { display: block; max-width: 100%; }
       linear-gradient(to bottom, rgba(240,245,252,0.30) 0%, transparent 40%);
   }
 }
+
+/* Motion cover (Liquify): video over the static cover, shown only while playing */
+.work-card__img-wrap { position: relative; }
+.work-card__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+.work-card__video.is-playing { opacity: 1; }
