@@ -418,9 +418,9 @@
 .cs-hero .cs-shot--hero,
 .cs-hero .cs-hero__img {
   width: calc(100% - 64px);
-  max-width: 960px;
+  max-width: 640px;
   margin: 0 auto;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 .cs-hero .cs-hero__img { height: auto; aspect-ratio: 16 / 9; }
@@ -429,3 +429,30 @@
   .cs-hero .cs-shot--hero,
   .cs-hero .cs-hero__img { width: calc(100% - 40px); border-radius: var(--radius-md); }
 }
+
+/* ---- Compact scale trial (matches homepage): small type, single 640px column ---- */
+.cs-overview__grid { grid-template-columns: 1fr; gap: 28px; padding-top: 8px; }
+.cs-title { font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; margin: 8px 0 14px; }
+.cs-lead { font-size: 15px; line-height: 1.75; max-width: none; }
+.cs-overview__meta {
+  margin-top: 0;
+  border-left: none;
+  padding-left: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+.cs-meta-item, .cs-meta-item:first-child { padding: 0; border-bottom: none; }
+.cs-meta__label { font-size: 10px; margin-bottom: 4px; }
+.cs-meta__value { font-size: 13px; }
+.cs-block { max-width: none; }
+.cs-section__title { font-size: 20px; font-weight: 600; margin: 8px 0 12px; }
+.cs-body { font-size: 14px; line-height: 1.8; }
+.cs-highlight { padding: 22px 18px; }
+.cs-highlight__num { font-size: 28px; }
+.cs-highlight p { font-size: 12px; }
+.cs-stack { gap: 12px; }
+.cs-nav-cases__next strong { font-size: 15px; }
+.cs-hero + .section { padding-top: 48px; }

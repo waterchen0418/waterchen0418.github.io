@@ -31,7 +31,7 @@
    TOKENS
    ============================ */
 :root {
-  --page-max: 1024px; /* 960px content + 32px gutters */
+  --page-max: 704px; /* 640px content + 32px gutters (compact scale trial) */
   --bg:        #eef4fb;
   --bg-alt:    #f7fafd;
   --surface:   #ffffff;
@@ -1373,4 +1373,62 @@ img, video { display: block; max-width: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-pill { display: none; }
+}
+
+/* ============================
+   COMPACT SCALE TRIAL (ref: small type, narrow column)
+   Everything below the hero. Remove this block to revert.
+   ============================ */
+.section { padding: 88px 0; }
+.label { font-size: 11px; margin-bottom: 10px; }
+.section-title { font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+.tag { font-size: 10px; padding: 3px 8px; }
+.btn { font-size: 13px; padding: 10px 20px; }
+
+/* About: single column */
+.about__grid { grid-template-columns: 1fr; gap: 28px; }
+.about__bio { font-size: 14px; line-height: 1.75; margin-bottom: 14px; }
+.about__skills { gap: 24px; margin-top: 28px; padding-top: 28px; }
+.skill-group__title { font-size: 10px; margin-bottom: 10px; }
+.skill-group ul li { font-size: 13px; padding: 5px 0; }
+.about__experience { margin-top: 24px; padding-top: 24px; }
+.about__exp-list li { padding: 10px 0; }
+.exp__role { font-size: 13px; }
+.exp__company { font-size: 12px; }
+
+/* Works: 2-up small cards, featured card stacks (image on top) */
+.works__header { margin-bottom: 28px; }
+.works__grid { gap: 16px; }
+.work-card { border-radius: var(--radius-md); }
+.work-card:hover { transform: translateY(-3px); }
+.work-card--featured { display: block; }
+.work-card--featured .work-card__img-wrap { aspect-ratio: 16/9; min-height: 0; }
+.work-card__body { padding: 16px 18px 18px; }
+.work-card__meta { margin-bottom: 10px; }
+.work-card__year { font-size: 11px; }
+.work-card__title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
+.work-card__desc { font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
+.work-card__link { font-size: 12px; }
+.work-card__lock { font-size: 28px; }
+
+/* Process: 2 x 2 grid */
+.process { padding: 88px 0; }
+.process__header { margin-bottom: 28px; }
+.process__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.process__connector { display: none; }
+.process__step { padding: 22px 20px 20px; border-radius: var(--radius-md); }
+.process__step:hover { transform: translateY(-3px); }
+.process__step::after { font-size: 64px; bottom: -10px; }
+.process__num { margin-bottom: 12px; }
+.process__step h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.process__step p { font-size: 12px; line-height: 1.7; }
+
+/* Contact / footer */
+.contact__title { margin-bottom: 24px; }
+.footer { padding: 28px 0; }
+.footer__copy, .footer__craft { font-size: 12px; }
+
+@media (max-width: 600px) {
+  .works__grid { grid-template-columns: 1fr; }
+  .process__inner { grid-template-columns: 1fr; }
 }
