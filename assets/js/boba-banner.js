@@ -36,8 +36,8 @@
     cupH: .44,
   };
   const LIQUID = .157;
-  const CELL = 2.5, LEVELS = 4, VIVID = .5;
-  const LIGHTEN = .2; // white veil baked into the background to lighten the banner (0–1)
+  const CELL = 1.6, LEVELS = 4, VIVID = .5;
+  const LIGHTEN = .32; // white veil baked into the background to lighten the banner (0–1)
 
   // ---------- Load green-screen cup & key it out ----------
   let sprite = null;
@@ -139,7 +139,7 @@
     const b = bgCv.getContext('2d'), iw = img.naturalWidth, ih = img.naturalHeight;
     // On narrow screens, zoom in and recentre on the machine + cup.
     const mobile = window.matchMedia('(max-width: 600px)').matches;
-    const V = mobile ? { zoom: 1.32, fx: 0.86, fy: 0.68 } : { zoom: 1, fx: 0.5, fy: 0.5 };
+    const V = mobile ? { zoom: 1.15, fx: 0.8, fy: 0.82 } : { zoom: 1, fx: 0.5, fy: 0.5 };
     const sc = Math.max(W / iw, H / ih) * V.zoom, dw = W / sc, dh = H / sc;
     let srcX = V.fx * iw - dw / 2, srcY = V.fy * ih - dh / 2;
     srcX = Math.max(0, Math.min(iw - dw, srcX)); srcY = Math.max(0, Math.min(ih - dh, srcY));

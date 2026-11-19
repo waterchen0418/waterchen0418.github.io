@@ -1117,27 +1117,13 @@ img, video { display: block; max-width: 100%; }
 .contact__overlay .contact__links { pointer-events: auto; }
 
 @media (max-width: 600px) {
-  .contact__banner {
-    aspect-ratio: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding: 28px 22px;
-  }
+  .contact__banner { aspect-ratio: 3 / 4; }
   .contact__overlay {
-    position: static;
-    inset: auto;
     max-width: 100%;
-    padding: 0;
+    justify-content: flex-start;
+    padding: 34px 26px;
   }
-  .contact__stage {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 14px;
-    overflow: hidden;
-  }
+  .contact__overlay .contact__links { flex-direction: column; align-items: stretch; }
 }
 
 /* ============================
