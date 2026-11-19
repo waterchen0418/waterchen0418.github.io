@@ -1134,7 +1134,7 @@ img, video { display: block; max-width: 100%; }
     position: relative;
     inset: auto;
     width: 100%;
-    aspect-ratio: 1584 / 672;
+    aspect-ratio: 4 / 3;
     border-radius: 14px;
     overflow: hidden;
   }

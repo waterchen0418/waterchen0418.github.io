@@ -135,11 +135,19 @@
     cv.width = W; cv.height = H;
     colorCv = mk(W, H); bgCv = mk(W, H);
 
-    const b = bgCv.getContext('2d'), iw = img.naturalWidth, ih = img.naturalHeight, sc = Math.max(W / iw, H / ih), dw = W / sc, dh = H / sc;
-    b.imageSmoothingQuality = 'high'; b.drawImage(img, (iw - dw) / 2, (ih - dh) / 2, dw, dh, 0, 0, W, H);
+    const b = bgCv.getContext('2d'), iw = img.naturalWidth, ih = img.naturalHeight;
+    // On narrow screens, zoom in and recentre on the machine + cup.
+    const mobile = window.matchMedia('(max-width: 600px)').matches;
+    const V = mobile ? { zoom: 1.32, fx: 0.86, fy: 0.68 } : { zoom: 1, fx: 0.5, fy: 0.5 };
+    const sc = Math.max(W / iw, H / ih) * V.zoom, dw = W / sc, dh = H / sc;
+    let srcX = V.fx * iw - dw / 2, srcY = V.fy * ih - dh / 2;
+    srcX = Math.max(0, Math.min(iw - dw, srcX)); srcY = Math.max(0, Math.min(ih - dh, srcY));
+    b.imageSmoothingQuality = 'high'; b.drawImage(img, srcX, srcY, dw, dh, 0, 0, W, H);
+    const mapX = rx => (rx * iw - srcX) * sc, mapY = ry => (ry * ih - srcY) * sc;
 
-    CUP.h = H * LAYOUT.cupH; CUP.w = CUP.h * sprite.width / sprite.height; CUP.x = W * SPOUT.x; CUP.bottom = H * LAYOUT.cupBottom;
-    SPOUT_PX.x = CUP.x; SPOUT_PX.y = H * SPOUT.y;
+    CUP.h = ih * LAYOUT.cupH * sc; CUP.w = CUP.h * sprite.width / sprite.height;
+    CUP.x = mapX(SPOUT.x); CUP.bottom = mapY(LAYOUT.cupBottom);
+    SPOUT_PX.x = CUP.x; SPOUT_PX.y = mapY(SPOUT.y);
     cupCv = mk(Math.ceil(CUP.w), Math.ceil(CUP.h));
     const cc = cupCv.getContext('2d'); cc.imageSmoothingQuality = 'high'; cc.drawImage(sprite, 0, 0, cupCv.width, cupCv.height);
 
