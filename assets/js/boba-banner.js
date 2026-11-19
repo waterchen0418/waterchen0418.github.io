@@ -137,15 +137,26 @@
     colorCv = mk(W, H); bgCv = mk(W, H);
 
     const b = bgCv.getContext('2d'), iw = img.naturalWidth, ih = img.naturalHeight;
-    // On narrow screens, zoom in and recentre on the machine + cup.
+    b.globalCompositeOperation = 'source-over';
+    // On narrow screens, zoom in on the machine + cup and drop it into the
+    // lower part of the banner, leaving a clean band at the top for the text.
     const mobile = window.matchMedia('(max-width: 600px)').matches;
-    const V = mobile ? { zoom: 1.15, fx: 0.8, fy: 0.82 } : { zoom: 1, fx: 0.5, fy: 0.5 };
-    const sc = Math.max(W / iw, H / ih) * V.zoom, dw = W / sc, dh = H / sc;
+    const V = mobile ? { zoom: 1.12, fx: 0.8, fy: 0.78 } : { zoom: 1, fx: 0.5, fy: 0.5 };
+    const topPad = mobile ? 0.30 : 0;
+    const ry0 = Math.round(H * topPad), rh = H - ry0, rw = W;
+    const PAPER = '#e2e7ed';
+    b.fillStyle = PAPER; b.fillRect(0, 0, W, H);
+    const sc = Math.max(rw / iw, rh / ih) * V.zoom, dw = rw / sc, dh = rh / sc;
     let srcX = V.fx * iw - dw / 2, srcY = V.fy * ih - dh / 2;
     srcX = Math.max(0, Math.min(iw - dw, srcX)); srcY = Math.max(0, Math.min(ih - dh, srcY));
-    b.imageSmoothingQuality = 'high'; b.drawImage(img, srcX, srcY, dw, dh, 0, 0, W, H);
-    if (LIGHTEN > 0) { b.globalCompositeOperation = 'source-over'; b.fillStyle = `rgba(255,255,255,${LIGHTEN})`; b.fillRect(0, 0, W, H); }
-    const mapX = rx => (rx * iw - srcX) * sc, mapY = ry => (ry * ih - srcY) * sc;
+    b.imageSmoothingQuality = 'high'; b.drawImage(img, srcX, srcY, dw, dh, 0, ry0, rw, rh);
+    if (LIGHTEN > 0) { b.fillStyle = `rgba(255,255,255,${LIGHTEN})`; b.fillRect(0, ry0, rw, rh); }
+    if (ry0 > 0) { // soften the seam into the blank band
+      const fh = Math.min(90, rh * .3), fade = b.createLinearGradient(0, ry0, 0, ry0 + fh);
+      fade.addColorStop(0, PAPER); fade.addColorStop(1, 'rgba(226,231,237,0)');
+      b.fillStyle = fade; b.fillRect(0, ry0, W, fh);
+    }
+    const mapX = rx => (rx * iw - srcX) * sc, mapY = ry => ry0 + (ry * ih - srcY) * sc;
 
     CUP.h = ih * LAYOUT.cupH * sc; CUP.w = CUP.h * sprite.width / sprite.height;
     CUP.x = mapX(SPOUT.x); CUP.bottom = mapY(LAYOUT.cupBottom);
