@@ -37,6 +37,7 @@
   };
   const LIQUID = .157;
   const CELL = 2.5, LEVELS = 4, VIVID = .5;
+  const LIGHTEN = .2; // white veil baked into the background to lighten the banner (0–1)
 
   // ---------- Load green-screen cup & key it out ----------
   let sprite = null;
@@ -143,6 +144,7 @@
     let srcX = V.fx * iw - dw / 2, srcY = V.fy * ih - dh / 2;
     srcX = Math.max(0, Math.min(iw - dw, srcX)); srcY = Math.max(0, Math.min(ih - dh, srcY));
     b.imageSmoothingQuality = 'high'; b.drawImage(img, srcX, srcY, dw, dh, 0, 0, W, H);
+    if (LIGHTEN > 0) { b.globalCompositeOperation = 'source-over'; b.fillStyle = `rgba(255,255,255,${LIGHTEN})`; b.fillRect(0, 0, W, H); }
     const mapX = rx => (rx * iw - srcX) * sc, mapY = ry => (ry * ih - srcY) * sc;
 
     CUP.h = ih * LAYOUT.cupH * sc; CUP.w = CUP.h * sprite.width / sprite.height;
@@ -170,19 +172,19 @@
     const t = Math.exp(-(e -= 120) / 170) * Math.max(0, 1 - e / 420);
     return { lift: 0, rot: .08 * Math.sin(2 * Math.PI * e / 140) * t, sx: 1, sy: 1 };
   }
-  let hovered = false, pressed = false, pourUntil = 0, jumpStart = -1, spriteRaf = 0, spriteLast = 0, glowAmt = 0, visible = true;
+  let hovered = false, pressed = false, overCup = false, pourUntil = 0, jumpStart = -1, spriteRaf = 0, spriteLast = 0, glowAmt = 0, visible = true;
   const liftS = { x: 0, v: 0 }, squashS = { x: 1, v: 0 };
   function spriteFrame(t) {
     const dt = Math.max(0, Math.min(64, t - spriteLast)); spriteLast = t;
-    spring(liftS, hovered ? HOVER_LIFT : 0, dt / 1000); spring(squashS, pressed ? .9 : 1, dt / 1000, 420, 30);
+    spring(liftS, overCup ? HOVER_LIFT : 0, dt / 1000); spring(squashS, pressed ? .9 : 1, dt / 1000, 420, 30);
     const pouring = hovered || t < pourUntil;
     if (pouring) { if (stream.a > 0) stream.a = stream.b = 0; stream.b = Math.min(1, stream.b + dt / 160); }
     else if (stream.b > 0) { stream.b = Math.min(1, stream.b + dt / 160); stream.a = Math.min(stream.b, stream.a + dt / 140); if (stream.a >= 1) stream.a = stream.b = 0; }
-    const glowTarget = hovered ? 1 : pouring ? .5 : 0;
+    const glowTarget = overCup ? 1 : 0; // the bright glow is cup-hover only
     glowAmt += (glowTarget - glowAmt) * (1 - Math.exp(-dt / (glowTarget > glowAmt ? 180 : 280)));
     if (jumpStart >= 0 && t - jumpStart >= JUMP_MS) jumpStart = -1;
     const j = jumpStart >= 0 ? jumpPose(t - jumpStart) : { lift: 0, rot: 0, sx: 1, sy: 1 };
-    pose.lift = Math.max(0, liftS.x + j.lift + .02 * Math.sin(2 * Math.PI * t / 2200) * (hovered ? 1 : 0));
+    pose.lift = Math.max(0, liftS.x + j.lift + .02 * Math.sin(2 * Math.PI * t / 2200) * (overCup ? 1 : 0));
     pose.rot = j.rot; pose.sy = j.sy * squashS.x; pose.sx = j.sx * (1 + (1 - squashS.x) * .6); pose.glow = glowAmt;
     const busy = pouring || stream.b > 0 || jumpStart >= 0 || Math.abs(liftS.x) + Math.abs(liftS.v) > 1e-4 || Math.abs(squashS.x - 1) + Math.abs(squashS.v) > 1e-4 || glowAmt > .002;
     if (!busy) Object.assign(pose, { lift: 0, rot: 0, sx: 1, sy: 1, glow: 0 });
@@ -239,8 +241,14 @@
     const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
     if (inside && !pt.inside && pt.open === 0) { pt.x = pt.tx; pt.y = pt.ty; }
     pt.inside = inside; if (inside || pt.open > 0) kick();
+    // Only a hover directly over the cup lights it up.
+    const cxp = (e.clientX - r.left) * (W / r.width), cyp = (e.clientY - r.top) * (H / r.height), pad = 1.12;
+    const nowCup = e.pointerType === 'mouse' && inside && !!CUP.w
+      && cxp >= CUP.x - CUP.w / 2 * pad && cxp <= CUP.x + CUP.w / 2 * pad
+      && cyp >= CUP.bottom - CUP.h * pad && cyp <= CUP.bottom + CUP.h * .04;
+    if (nowCup !== overCup) { overCup = nowCup; kickSprite(); }
   }, { passive: true });
-  document.documentElement.addEventListener('pointerleave', () => { pt.inside = false; kick(); });
+  document.documentElement.addEventListener('pointerleave', () => { pt.inside = false; if (overCup) { overCup = false; kickSprite(); } kick(); });
 
   // ---------- Boot ----------
   const bgReady = img.complete && img.naturalWidth ? Promise.resolve() : new Promise(res => { img.onload = res; img.onerror = res; });
