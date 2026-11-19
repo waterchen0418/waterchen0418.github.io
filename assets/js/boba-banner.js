@@ -142,7 +142,7 @@
     // lower part of the banner, leaving a clean band at the top for the text.
     const mobile = window.matchMedia('(max-width: 600px)').matches;
     const V = mobile ? { zoom: 1.12, fx: 0.8, fy: 0.78 } : { zoom: 1, fx: 0.5, fy: 0.5 };
-    const topPad = mobile ? 0.30 : 0;
+    const topPad = mobile ? 0.50 : 0;
     const ry0 = Math.round(H * topPad), rh = H - ry0, rw = W;
     const PAPER = '#e2e7ed';
     b.fillStyle = PAPER; b.fillRect(0, 0, W, H);

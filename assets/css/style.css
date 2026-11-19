@@ -1115,6 +1115,8 @@ img, video { display: block; max-width: 100%; }
 }
 .contact__overlay .contact__title { margin-bottom: clamp(18px, 3vw, 40px); }
 .contact__overlay .contact__links { pointer-events: auto; }
+.contact__overlay .btn--ghost { border-color: var(--text); color: var(--text); }
+.contact__overlay .btn--ghost:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
 
 @media (max-width: 600px) {
   .contact__banner { aspect-ratio: 3 / 4; }
