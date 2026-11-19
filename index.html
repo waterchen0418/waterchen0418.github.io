@@ -375,13 +375,20 @@
   <!-- CONTACT -->
   <section class="contact section" id="contact">
     <div class="container">
-      <div class="contact__inner">
-        <p class="label" data-zh="聯絡我">Get In Touch</p>
-        <h2 class="section-title contact__title" data-zh="來個 bubble tea chat 吧">Let's chat over bubble tea</h2>
-        <div class="contact__links">
-          <a href="mailto:howluoeyes@gmail.com" class="btn btn--primary" data-zh="打聲招呼">Say Hello</a>
-          <a href="https://linkedin.com/in/sharon-YCH" class="btn btn--ghost" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://www.behance.net/howluoeyesd200" class="btn btn--ghost" target="_blank" rel="noopener">Behance</a>
+      <div class="contact__banner">
+        <div class="contact__overlay">
+          <p class="label" data-zh="聯絡我">Get In Touch</p>
+          <h2 class="section-title contact__title" data-zh="來個 bubble tea chat 吧">Let's chat over bubble tea</h2>
+          <div class="contact__links">
+            <a href="mailto:howluoeyes@gmail.com" class="btn btn--primary" data-zh="打聲招呼">Say Hello</a>
+            <a href="https://linkedin.com/in/sharon-YCH" class="btn btn--ghost" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.behance.net/howluoeyesd200" class="btn btn--ghost" target="_blank" rel="noopener">Behance</a>
+          </div>
+        </div>
+        <div class="contact__stage" id="bobaBanner">
+          <img id="bobaSrc" class="boba__src" src="assets/img/boba/boba-machine-bg2.jpg" alt="" />
+          <canvas id="bobaCanvas" class="boba__canvas"></canvas>
+          <div class="hotspot" id="bobaHotspot" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -397,5 +404,6 @@
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/boba-banner.js"></script>
 </body>
 </html>
