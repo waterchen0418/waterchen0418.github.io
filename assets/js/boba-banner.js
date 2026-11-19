@@ -30,9 +30,9 @@
   // ---------- Config ----------
   const cv = document.getElementById('bobaCanvas'), img = document.getElementById('bobaSrc'), hot = document.getElementById('bobaHotspot');
   const ctx = cv.getContext('2d');
-  const SPOUT = { x: .8359, y: .3646 }; // spout lower edge in the bg image (ratio)
+  const SPOUT = { x: .8233, y: .3497 }; // spout lower edge in the bg image (ratio); machine nudged left 20px / up 10px
   const LAYOUT = {
-    cupBottom: .93,
+    cupBottom: .9151, // cup follows the machine up 10px
     cupH: .44,
   };
   const LIQUID = .157;
