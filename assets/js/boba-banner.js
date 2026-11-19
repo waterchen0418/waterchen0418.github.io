@@ -87,16 +87,37 @@
     if (stream.b > stream.a) {
       const x0 = SPOUT_PX.x, y0 = SPOUT_PX.y - 1, surf = by - liftPx - sh * pose.sy * (1 - LIQUID), L = surf - y0;
       if (L > 1) {
-        const ya = y0 + stream.a * L, yb = y0 + stream.b * L, ww = Math.max(1.5, sw * .06), t = performance.now();
-        const halo = c.createLinearGradient(x0 - ww * 2, 0, x0 + ww * 2, 0);
-        halo.addColorStop(0, 'rgba(150,200,255,0)'); halo.addColorStop(.5, 'rgba(150,200,255,.35)'); halo.addColorStop(1, 'rgba(150,200,255,0)');
-        c.save(); c.globalCompositeOperation = 'lighter'; c.fillStyle = halo; c.fillRect(x0 - ww * 2, ya, ww * 4, yb - ya); c.restore();
-        const g = c.createLinearGradient(x0 - ww / 2, 0, x0 + ww / 2, 0);
-        g.addColorStop(0, '#c9dcf5'); g.addColorStop(.45, '#f4f8ff'); g.addColorStop(1, '#b8cdeb');
-        c.fillStyle = g; c.beginPath(); c.roundRect(x0 - ww / 2, ya, ww, yb - ya, ww / 2); c.fill();
+        const ya = y0 + stream.a * L, yb = y0 + stream.b * L, ww = Math.max(1.5, sw * .055), t = performance.now();
+        const N = 14;
+        // steadier at the spout, wavers more as it falls — reads as moving water
+        const wav = y => ww * .5 * Math.sin((y - y0) * .05 - t * .012) * Math.min(1, (y - ya) / (L * .4) + .15);
+        const half = y => ww * .5 * (.72 + .28 * (y - y0) / L); // a touch thicker lower down
+        // soft halo following the ribbon
+        c.save(); c.globalCompositeOperation = 'lighter'; c.strokeStyle = 'rgba(150,200,255,.22)'; c.lineWidth = ww * 3; c.lineCap = 'round';
+        c.beginPath();
+        for (let i = 0; i <= N; i++) { const y = ya + (yb - ya) * i / N, xx = x0 + wav(y); i ? c.lineTo(xx, y) : c.moveTo(xx, y); }
+        c.stroke(); c.restore();
+        // water column as a wavering ribbon
+        c.beginPath();
+        for (let i = 0; i <= N; i++) { const y = ya + (yb - ya) * i / N; c[i ? 'lineTo' : 'moveTo'](x0 + wav(y) - half(y), y); }
+        for (let i = N; i >= 0; i--) { const y = ya + (yb - ya) * i / N; c.lineTo(x0 + wav(y) + half(y), y); }
+        c.closePath();
+        const g = c.createLinearGradient(x0 - ww, 0, x0 + ww, 0);
+        g.addColorStop(0, '#bcd2ef'); g.addColorStop(.42, '#f4f8ff'); g.addColorStop(.62, '#eaf2ff'); g.addColorStop(1, '#aec6e6');
+        c.fillStyle = g; c.fill();
+        // highlight dashes travelling downward
+        if (yb - ya > 4) {
+          c.save(); c.globalCompositeOperation = 'lighter'; c.fillStyle = 'rgba(255,255,255,.5)';
+          const seg = Math.max(8, L * .22), flow = (t * .06) % seg;
+          for (let s = ya - seg + flow; s < yb; s += seg) {
+            const y1 = Math.max(ya, s), y2 = Math.min(yb, s + seg * .4); if (y2 - y1 < 1) continue;
+            const my = (y1 + y2) / 2; c.beginPath(); c.ellipse(x0 + wav(my), my, half(my) * .5, (y2 - y1) / 2, 0, 0, 7); c.fill();
+          }
+          c.restore();
+        }
         if (stream.b >= 1) {
           const r = ww * (1.3 + .25 * Math.sin(t / 90));
-          c.save(); c.globalCompositeOperation = 'lighter'; c.translate(x0, surf); c.scale(r * 1.8, r * .6);
+          c.save(); c.globalCompositeOperation = 'lighter'; c.translate(x0 + wav(surf), surf); c.scale(r * 1.8, r * .6);
           const sp = c.createRadialGradient(0, 0, 0, 0, 0, 1); sp.addColorStop(0, 'rgba(220,240,255,.9)'); sp.addColorStop(1, 'rgba(220,240,255,0)');
           c.fillStyle = sp; c.beginPath(); c.arc(0, 0, 1, 0, 7); c.fill(); c.restore();
         }
@@ -151,9 +172,13 @@
     srcX = Math.max(0, Math.min(iw - dw, srcX)); srcY = Math.max(0, Math.min(ih - dh, srcY));
     b.imageSmoothingQuality = 'high'; b.drawImage(img, srcX, srcY, dw, dh, 0, ry0, rw, rh);
     if (LIGHTEN > 0) { b.fillStyle = `rgba(255,255,255,${LIGHTEN})`; b.fillRect(0, ry0, rw, rh); }
-    if (ry0 > 0) { // soften the seam into the blank band
-      const fh = Math.min(90, rh * .3), fade = b.createLinearGradient(0, ry0, 0, ry0 + fh);
-      fade.addColorStop(0, PAPER); fade.addColorStop(1, 'rgba(226,231,237,0)');
+    if (ry0 > 0) { // ease the machine out of the blank band (smoothstep-like ramp)
+      const fh = Math.round(rh * .36), fade = b.createLinearGradient(0, ry0, 0, ry0 + fh);
+      fade.addColorStop(0, '#e2e7ed');
+      fade.addColorStop(.25, 'rgba(226,231,237,.74)');
+      fade.addColorStop(.5, 'rgba(226,231,237,.40)');
+      fade.addColorStop(.75, 'rgba(226,231,237,.14)');
+      fade.addColorStop(1, 'rgba(226,231,237,0)');
       b.fillStyle = fade; b.fillRect(0, ry0, W, fh);
     }
     const mapX = rx => (rx * iw - srcX) * sc, mapY = ry => ry0 + (ry * ih - srcY) * sc;

@@ -1113,7 +1113,7 @@ img, video { display: block; max-width: 100%; }
   padding: clamp(28px, 5vw, 64px);
   pointer-events: none;
 }
-.contact__overlay .contact__title { margin-bottom: clamp(18px, 3vw, 40px); }
+.contact__overlay .contact__title { margin-bottom: clamp(14px, 1.6vw, 22px); }
 .contact__overlay .contact__links { pointer-events: auto; flex-wrap: nowrap; }
 .contact__overlay .contact__links .btn { flex: 0 0 auto; white-space: nowrap; }
 .contact__overlay .btn--ghost { border-color: var(--blue-mid); color: var(--blue-mid); }
