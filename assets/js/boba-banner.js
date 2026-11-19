@@ -38,6 +38,11 @@
   const LIQUID = .157;
   const CELL = 1.6, LEVELS = 4, VIVID = .5;
   const LIGHTEN = .32; // white veil baked into the background to lighten the banner (0–1)
+  // Water-stream style — subtle micro-interactions. Switch live with ?stream=
+  //   thread  : a slim, calm water thread (default)
+  //   drip    : sparse droplets falling one by one
+  //   pulse   : a thin column with a gentle breathing shimmer
+  const STREAM_STYLE = (new URLSearchParams(location.search).get('stream') || 'thread').toLowerCase();
 
   // ---------- Load green-screen cup & key it out ----------
   let sprite = null;
@@ -65,6 +70,52 @@
   const pose = { lift: 0, rot: 0, sx: 1, sy: 1, glow: 0 };
   const stream = { a: 0, b: 0 };
 
+  // ---------- Water stream (subtle micro-interaction variants) ----------
+  function surfaceRipple(c, x0, surf, ww, amp) {
+    if (stream.b < 1) return;
+    const t = performance.now(), r = ww * (1.0 + .18 * Math.sin(t / 150));
+    c.save(); c.globalCompositeOperation = 'lighter'; c.translate(x0, surf); c.scale(r * 1.5, r * .45);
+    const sp = c.createRadialGradient(0, 0, 0, 0, 0, 1);
+    sp.addColorStop(0, `rgba(220,240,255,${amp})`); sp.addColorStop(1, 'rgba(220,240,255,0)');
+    c.fillStyle = sp; c.beginPath(); c.arc(0, 0, 1, 0, 7); c.fill(); c.restore();
+  }
+  function streamThread(c, x0, y0, surf, L, sw) {
+    const ya = y0 + stream.a * L, yb = y0 + stream.b * L, ww = Math.max(1, sw * .03);
+    c.save(); c.globalCompositeOperation = 'lighter'; c.strokeStyle = 'rgba(175,212,255,.12)'; c.lineWidth = ww * 2.4; c.lineCap = 'round';
+    c.beginPath(); c.moveTo(x0, ya); c.lineTo(x0, yb); c.stroke(); c.restore();
+    const g = c.createLinearGradient(x0 - ww, 0, x0 + ww, 0);
+    g.addColorStop(0, 'rgba(198,216,240,.85)'); g.addColorStop(.5, 'rgba(244,248,255,.95)'); g.addColorStop(1, 'rgba(190,210,235,.85)');
+    c.fillStyle = g; c.beginPath(); c.roundRect(x0 - ww / 2, ya, ww, yb - ya, ww / 2); c.fill();
+    surfaceRipple(c, x0, surf, ww, .5);
+  }
+  function streamDrip(c, x0, y0, surf, L, sw) {
+    const t = performance.now(), ww = Math.max(1.3, sw * .032), period = 560, nd = 2, span = surf - y0;
+    for (let k = 0; k < nd; k++) {
+      const ph = ((t + k * period / nd) % period) / period, yy = y0 + span * easeOut(ph), rad = ww * (1.15 - .25 * ph);
+      const g = c.createRadialGradient(x0, yy, 0, x0, yy, rad * 1.7);
+      g.addColorStop(0, 'rgba(244,248,255,.95)'); g.addColorStop(.6, 'rgba(210,226,248,.6)'); g.addColorStop(1, 'rgba(200,220,245,0)');
+      c.save(); c.fillStyle = g; c.beginPath(); c.ellipse(x0, yy, rad * .78, rad * 1.35, 0, 0, 7); c.fill(); c.restore();
+    }
+    const sp = (t % period) / period;
+    if (sp < .32) { const a = 1 - sp / .32, r = ww * (1 + 2.2 * sp); c.save(); c.globalCompositeOperation = 'lighter'; c.translate(x0, surf); c.scale(r * 1.3, r * .38);
+      const g = c.createRadialGradient(0, 0, 0, 0, 0, 1); g.addColorStop(0, `rgba(220,240,255,${.5 * a})`); g.addColorStop(1, 'rgba(220,240,255,0)');
+      c.fillStyle = g; c.beginPath(); c.arc(0, 0, 1, 0, 7); c.fill(); c.restore(); }
+  }
+  function streamPulse(c, x0, y0, surf, L, sw) {
+    const ya = y0 + stream.a * L, yb = y0 + stream.b * L, ww = Math.max(1.1, sw * .028), t = performance.now();
+    const breath = .55 + .45 * (.5 + .5 * Math.sin(t / 240));
+    const g = c.createLinearGradient(x0 - ww, 0, x0 + ww, 0);
+    g.addColorStop(0, `rgba(198,216,240,${.8 * breath})`); g.addColorStop(.5, `rgba(244,248,255,${.95 * breath})`); g.addColorStop(1, `rgba(190,210,235,${.8 * breath})`);
+    c.fillStyle = g; c.beginPath(); c.roundRect(x0 - ww / 2, ya, ww, yb - ya, ww / 2); c.fill();
+    if (yb - ya > 6) { const seg = (yb - ya) * .3, pos = ya + ((t / 760) % 1) * (yb - ya), y1 = pos, y2 = Math.min(yb, pos + seg);
+      c.save(); c.globalCompositeOperation = 'lighter'; c.fillStyle = 'rgba(255,255,255,.4)';
+      c.beginPath(); c.ellipse(x0, (y1 + y2) / 2, ww * .4, (y2 - y1) / 2, 0, 0, 7); c.fill(); c.restore(); }
+    surfaceRipple(c, x0, surf, ww, .45 * breath);
+  }
+  function drawStream(c, x0, y0, surf, L, sw) {
+    (STREAM_STYLE === 'drip' ? streamDrip : STREAM_STYLE === 'pulse' ? streamPulse : streamThread)(c, x0, y0, surf, L, sw);
+  }
+
   function drawScene(c) {
     const sw = CUP.w, sh = CUP.h, bx = CUP.x, by = CUP.bottom, liftPx = pose.lift * sh;
     c.globalCompositeOperation = 'source-over'; c.globalAlpha = 1;
@@ -86,42 +137,7 @@
 
     if (stream.b > stream.a) {
       const x0 = SPOUT_PX.x, y0 = SPOUT_PX.y - 1, surf = by - liftPx - sh * pose.sy * (1 - LIQUID), L = surf - y0;
-      if (L > 1) {
-        const ya = y0 + stream.a * L, yb = y0 + stream.b * L, ww = Math.max(1.5, sw * .055), t = performance.now();
-        const N = 14;
-        // steadier at the spout, wavers more as it falls — reads as moving water
-        const wav = y => ww * .5 * Math.sin((y - y0) * .05 - t * .012) * Math.min(1, (y - ya) / (L * .4) + .15);
-        const half = y => ww * .5 * (.72 + .28 * (y - y0) / L); // a touch thicker lower down
-        // soft halo following the ribbon
-        c.save(); c.globalCompositeOperation = 'lighter'; c.strokeStyle = 'rgba(150,200,255,.22)'; c.lineWidth = ww * 3; c.lineCap = 'round';
-        c.beginPath();
-        for (let i = 0; i <= N; i++) { const y = ya + (yb - ya) * i / N, xx = x0 + wav(y); i ? c.lineTo(xx, y) : c.moveTo(xx, y); }
-        c.stroke(); c.restore();
-        // water column as a wavering ribbon
-        c.beginPath();
-        for (let i = 0; i <= N; i++) { const y = ya + (yb - ya) * i / N; c[i ? 'lineTo' : 'moveTo'](x0 + wav(y) - half(y), y); }
-        for (let i = N; i >= 0; i--) { const y = ya + (yb - ya) * i / N; c.lineTo(x0 + wav(y) + half(y), y); }
-        c.closePath();
-        const g = c.createLinearGradient(x0 - ww, 0, x0 + ww, 0);
-        g.addColorStop(0, '#bcd2ef'); g.addColorStop(.42, '#f4f8ff'); g.addColorStop(.62, '#eaf2ff'); g.addColorStop(1, '#aec6e6');
-        c.fillStyle = g; c.fill();
-        // highlight dashes travelling downward
-        if (yb - ya > 4) {
-          c.save(); c.globalCompositeOperation = 'lighter'; c.fillStyle = 'rgba(255,255,255,.5)';
-          const seg = Math.max(8, L * .22), flow = (t * .06) % seg;
-          for (let s = ya - seg + flow; s < yb; s += seg) {
-            const y1 = Math.max(ya, s), y2 = Math.min(yb, s + seg * .4); if (y2 - y1 < 1) continue;
-            const my = (y1 + y2) / 2; c.beginPath(); c.ellipse(x0 + wav(my), my, half(my) * .5, (y2 - y1) / 2, 0, 0, 7); c.fill();
-          }
-          c.restore();
-        }
-        if (stream.b >= 1) {
-          const r = ww * (1.3 + .25 * Math.sin(t / 90));
-          c.save(); c.globalCompositeOperation = 'lighter'; c.translate(x0 + wav(surf), surf); c.scale(r * 1.8, r * .6);
-          const sp = c.createRadialGradient(0, 0, 0, 0, 0, 1); sp.addColorStop(0, 'rgba(220,240,255,.9)'); sp.addColorStop(1, 'rgba(220,240,255,0)');
-          c.fillStyle = sp; c.beginPath(); c.arc(0, 0, 1, 0, 7); c.fill(); c.restore();
-        }
-      }
+      if (L > 1) drawStream(c, x0, y0, surf, L, sw);
     }
   }
 
