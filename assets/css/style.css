@@ -1114,9 +1114,10 @@ img, video { display: block; max-width: 100%; }
   pointer-events: none;
 }
 .contact__overlay .contact__title { margin-bottom: clamp(18px, 3vw, 40px); }
-.contact__overlay .contact__links { pointer-events: auto; }
-.contact__overlay .btn--ghost { border-color: var(--text); color: var(--text); }
-.contact__overlay .btn--ghost:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
+.contact__overlay .contact__links { pointer-events: auto; flex-wrap: nowrap; }
+.contact__overlay .contact__links .btn { flex: 0 0 auto; white-space: nowrap; }
+.contact__overlay .btn--ghost { border-color: var(--blue-mid); color: var(--blue-mid); }
+.contact__overlay .btn--ghost:hover { border-color: var(--blue-dark, var(--blue-mid)); color: var(--blue-dark, var(--blue-mid)); }
 
 @media (max-width: 600px) {
   .contact__banner { aspect-ratio: 3 / 4; }
