@@ -1463,7 +1463,7 @@ img, video { display: block; max-width: 100%; }
 .work-card { padding: 8px; border: 1px solid var(--border); border-radius: 16px; }
 .work-card__img-wrap { border-radius: 10px; }
 .work-card__body { padding: 12px 6px 6px; }
-.work-card__head { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.work-card__head { display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
 .work-card__title { font-size: 16px; font-weight: 600; line-height: 1.35; margin: 0; }
 .work-card__arrow {
   flex-shrink: 0;
